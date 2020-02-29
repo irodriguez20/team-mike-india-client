@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import NavBar from '../NavBar/NavBar';
+import PrivateRoute from '../Utils/PrivateRoute';
+import PublicRoute from '../Utils/PublicOnlyRoute';
 import './App.css';
 
 class App extends Component {
@@ -13,8 +17,11 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>Name TBD</h1>
-          <h2>Each one Teach One</h2>
+          <NavBar />
+          <section className="App-name-motto">
+            <h1>upLift</h1>
+            <h2>Each one Teach One</h2>
+          </section>
         </header>
       </div>
     );
