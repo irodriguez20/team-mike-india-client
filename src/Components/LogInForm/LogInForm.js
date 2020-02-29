@@ -1,5 +1,5 @@
 import React from "react";
-// import toursAndUserContext from "../context/toursAndUserContext.js";
+import toursAndUserContext from "../context/toursAndUserContext.js";
 import { Redirect } from "react-router-dom";
 
 class LogInForm extends React.Component {
@@ -9,7 +9,7 @@ class LogInForm extends React.Component {
         routeToHome: false
     };
 
-    //   static contextType = toursAndUserContext;
+    static contextType = toursAndUserContext;
 
     render() {
         const userInfo = {
