@@ -1,10 +1,13 @@
 import React from "react";
 import "./NavBar.css";
 import { Link } from "react-router-dom";
+import DrawerToggleButton from "../sidedrawer/DrawerToggleButton";
+import Logo from '../../../src/logo.png';
+import NavBarContext from '../../contexts/NavBarContext';
 
 
 class NavBar extends React.Component {
-    //   static contextType = ;
+    static contextType = NavBarContext;
 
     linkToProfile = `/users/${this.context.username}`;
 
@@ -13,11 +16,12 @@ class NavBar extends React.Component {
             <header className="toolbar">
                 <nav className="toolbar__navigation">
                     <div className="toolbar__logo">
-                        {/* <Link to="/">
-              <img src="" alt="logo" />
-            </Link> */}
+                        <Link to="/">
+                            <img src={Logo} alt="logo" />
+                        </Link>
                     </div>
                     <div className="spacer" />
+
                     <div className="toolbar_navigation_items">
                         <ul>
                             {this.context.loggedIn ? (
@@ -47,9 +51,9 @@ class NavBar extends React.Component {
                                 )}
                         </ul>
                     </div>
-                    {/* <div className="toolbar__toggle-button">
-            <DrawerToggleButton click={this.props.drawerClickHandler} />
-          </div> */}
+                    <div className="toolbar__toggle-button">
+                        <DrawerToggleButton click={this.props.drawerClickHandler} />
+                    </div>
                 </nav>
             </header>
         );

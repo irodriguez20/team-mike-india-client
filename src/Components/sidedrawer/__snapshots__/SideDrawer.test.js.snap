@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideDrawer component renders the DrawerToggleButton component 1`] = `
+<button
+  className="toggle-button"
+  onClick={[Function]}
+>
+  <div
+    className="toggle-button__line"
+  />
+  <div
+    className="toggle-button__line"
+  />
+  <div
+    className="toggle-button__line"
+  />
+</button>
+`;
+
+exports[`SideDrawer component renders the SideDrawer component 1`] = `
+<nav
+  className="side-drawer"
+>
+  <ul>
+    <li
+      onClick={[Function]}
+    >
+      <Link
+        to="/signup"
+      >
+        Sign Up
+      </Link>
+    </li>
+  </ul>
+</nav>
+`;

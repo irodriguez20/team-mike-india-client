@@ -15,13 +15,16 @@
 }
 
 .toolbar__logo {
-  margin-left: 1rem;
+  /* margin-left: 0.5rem; */
+  margin-top: 1rem;
+  padding-top: 1rem;
 }
 
 .toolbar__logo a img {
   color: white;
+  padding-top: 20px;
   text-decoration: none;
-  height: 40px;
+  width: 100px;
 }
 
 .spacer {

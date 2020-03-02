@@ -1,8 +1,15 @@
 import TokenService from '../services/token-service'
 import config from '../config'
+import STORE from '../config';
+
+
+let posts = STORE.posts;
+let users = STORE.users;
 
 const PostApiService = {
     getPosts() {
+        console.log(posts, users)
+
         return fetch(`${config.API_ENDPOINT}/posts`, {
             headers: {
             },
@@ -14,7 +21,7 @@ const PostApiService = {
             )
     },
     getPost(postId) {
-        return fetch(`${config.API_ENDPOINT}/posts/${PostId}`, {
+        return fetch(`${config.API_ENDPOINT}/posts/${postId}`, {
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
             },
