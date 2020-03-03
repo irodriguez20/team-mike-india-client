@@ -5,6 +5,12 @@ const NavBarContext = React.createContext({
     backDropClickHandler: () => { },
     handleSignOut: () => { },
     handleProfileLink: () => { },
+    logIn: () => { },
+    signUp: () => { },
+    userName: "",
+    loggedIn: "",
+    userFirstName: "",
+    userLastName: "",
 })
 
 export default NavBarContext;

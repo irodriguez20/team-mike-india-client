@@ -1,5 +1,5 @@
 import React from "react";
-// import toursAndUserContext from "../context/toursAndUserContext.js";
+import NavBarContext from '../../contexts/NavBarContext';
 import { Redirect } from "react-router-dom";
 import "./SignUpForm.css";
 
@@ -10,11 +10,11 @@ class SignUpForm extends React.Component {
         last_name: "",
         email: "",
         password: "",
-        // routeToHome: false,
+        routeToHome: false,
         signUpToggle: "container"
     };
 
-    // static contextType = toursAndUserContext;
+    static contextType = NavBarContext;
 
     handleSignUpToggle = () => {
         this.setState({ signUpToggle: "container right-panel-active" });
@@ -132,7 +132,7 @@ class SignUpForm extends React.Component {
                                         password: this.state.password
                                     };
                                     this.context.logIn(loginInfo);
-                                    // this.setState({ routeToHome: this.context.loggedIn });
+                                    this.setState({ routeToHome: this.context.loggedIn });
                                 }}
                             >
                                 Sign In
