@@ -1,9 +1,9 @@
 import React from "react";
 import "./BackDrop.css";
-import toursAndUserContext from "../context/toursAndUserContext.js";
+import NavBarContext from '../../contexts/NavBarContext';
 
 class BackDrop extends React.Component {
-  static contextType = toursAndUserContext;
+  static contextType = NavBarContext;
 
   render() {
     return (

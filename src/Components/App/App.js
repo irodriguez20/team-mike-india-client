@@ -11,6 +11,7 @@ import PostListPage from '../../routes/PostListPage/PostListPage';
 import SideDrawer from '../../Components/sidedrawer/SideDrawer';
 import BackDrop from '../../Components/backdrop/BackDrop';
 import NavBarContext from '../../contexts/NavBarContext';
+import tokenService from '../../services/token-service';
 import './App.css';
 
 class App extends Component {
@@ -75,10 +76,10 @@ class App extends Component {
       <div className="App" style={{ height: "100%" }}>
         <NavBarContext.Provider value={navBarContextValue}>
           <header className="App-header">
-            <NavBar />
+            <NavBar drawerClickHandler={this.drawerToggleClickHandler} />
             <SideDrawer show={this.state.sideDrawerOpen} />
             {backDrop}
-            <BackDrop />
+
             <section className="App-name-motto">
               <h1>Welcome To upLift</h1>
               <h2>Where we believe mentorship should be accessible to everyone.</h2>

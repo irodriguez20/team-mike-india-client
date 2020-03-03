@@ -17,7 +17,7 @@ class DrawerToggleButton extends React.Component {
     return (
       <button
         className="toggle-button"
-        onClick={e => this.context.drawerToggleClickHandler()}
+        onClick={this.props.click}
       >
         <div className="toggle-button__line"></div>
         <div className="toggle-button__line"></div>
