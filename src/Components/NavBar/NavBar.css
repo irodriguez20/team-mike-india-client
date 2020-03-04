@@ -15,16 +15,15 @@
 }
 
 .toolbar__logo {
-  /* margin-left: 0.5rem; */
-  margin-top: 1rem;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
   padding-top: 1rem;
 }
 
 .toolbar__logo a img {
   color: white;
-  padding-top: 20px;
   text-decoration: none;
-  width: 100px;
+  max-width: 120px;
 }
 
 .spacer {
@@ -38,7 +37,8 @@
 
 .toolbar_navigation_items a:hover,
 .toolbar_navigation_items a:active {
-  color: #fa923f;
+  color: #000638;
+  font-weight: bold;
 }
 
 .toolbar_navigation_items ul {

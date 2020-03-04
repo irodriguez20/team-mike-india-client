@@ -1,17 +1,12 @@
 import TokenService from '../services/token-service'
 import config from '../config'
-import STORE from '../config';
 
-
-let posts = STORE.posts;
-let users = STORE.users;
 
 const PostApiService = {
     getPosts() {
-        console.log(posts, users)
-
-        return fetch(`${config.API_ENDPOINT}/posts`, {
+        return fetch(`${config.API_ENDPOINT}/api/posts`, {
             headers: {
+                'authorization': `bearer ${config.TOKEN_KEY}`,
             },
         })
             .then(res =>
@@ -21,9 +16,9 @@ const PostApiService = {
             )
     },
     getPost(postId) {
-        return fetch(`${config.API_ENDPOINT}/posts/${postId}`, {
+        return fetch(`${config.API_ENDPOINT}/api/posts/:${postId}`, {
             headers: {
-                'authorization': `bearer ${TokenService.getAuthToken()}`,
+                'authorization': `bearer ${config.TOKEN_KEY}`,
             },
         })
             .then(res =>
@@ -33,9 +28,9 @@ const PostApiService = {
             )
     },
     getPostComments(postId) {
-        return fetch(`${config.API_ENDPOINT}/things/${postId}/comments`, {
+        return fetch(`${config.API_ENDPOINT}/api/comments`, {
             headers: {
-                'authorization': `bearer ${TokenService.getAuthToken()}`,
+                'authorization': `bearer ${config.TOKEN_KEY}`,
             },
         })
             .then(res =>
@@ -49,7 +44,7 @@ const PostApiService = {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
-                'authorization': `bearer ${TokenService.getAuthToken()}`,
+                'authorization': `bearer ${config.TOKEN_KEY}`,
             },
             body: JSON.stringify({
                 post_id: postId,

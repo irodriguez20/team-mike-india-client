@@ -13,6 +13,9 @@ import BackDrop from '../../Components/backdrop/BackDrop';
 import NavBarContext from '../../contexts/NavBarContext';
 import tokenService from '../../services/token-service';
 import './App.css';
+import LandingPage from '../LandingPage/LandingPage';
+import AuthApiService from '../../services/auth-api-service';
+import config from '../../config';
 
 class App extends Component {
   state = {
@@ -20,7 +23,7 @@ class App extends Component {
     loggedIn: false,
     userId: "",
     userEmail: "",
-    userName: tokenService.userName,
+    userName: "",
     userFirstName: "",
     userLastName: "",
     token: tokenService.token,
@@ -28,6 +31,7 @@ class App extends Component {
     channelsSearchResults: [],
     sideDrawerOpen: false,
     searchResults: [],
+    posts: [],
     // searchLocation: ""
   };
 
@@ -46,6 +50,42 @@ class App extends Component {
     this.setState({ sideDrawerOpen: false });
   };
 
+  componentDidMount() {
+    if (this.state.token !== null && this.state.userName !== null) {
+      const loggedInUser = {
+        userName: this.state.userName
+      };
+
+      fetch(`${config.API_ENDPOINT}/api/auth/`, {
+        method: "POST",
+        headers: new Headers({
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify(loggedInUser)
+      })
+        .then(res => {
+          return res.json();
+        })
+        .then(res => {
+          console.log(res);
+          this.setState({
+            loggedIn: true,
+            userId: res.id,
+            userLastName: res.lastName,
+            userFirstName: res.firstName,
+            userName: res.userName,
+            userEmail: res.useremail
+          });
+          this.fetchPosts();
+        })
+        .catch(err => {
+          console.error({ err });
+        });
+    } else {
+      this.fetchPosts();
+    }
+  }
+
   signUp = userInfo => {
     const newUser = {
       username: userInfo.userName,
@@ -56,28 +96,29 @@ class App extends Component {
     };
 
     this.logIn(newUser);
-    // fetch(`https://pacific-sands-75155.herokuapp.com/api/users`, {
-    //   method: "POST",
-    //   headers: new Headers({
-    //     "Content-Type": "application/json"
-    //   }),
-    //   body: JSON.stringify(newUser)
-    // })
-    //   .then(res => {
-    //     return res.json();
-    //   })
-    //   .then(res => {
-    //     const user = {
-    //       user_name: res.username,
-    //       email: res.email,
-    //       password: res.password
-    //     };
-    //     this.logIn(user);
-    //     this.fetchTours();
-    //   })
-    //   .catch(err => {
-    //     Swal.fire(err.error.message);
-    //   });
+    fetch(`${config.API_ENDPOINT}/api/users`, {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        "auth": `${config.TOKEN_KEY}`
+      }),
+      body: JSON.stringify(newUser)
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(res => {
+        const user = {
+          user_name: res.username,
+          email: res.email,
+          password: res.password
+        };
+        this.logIn(user);
+        this.fetchPosts();
+      })
+      .catch(error => {
+        console.error({ error })
+      })
   };
 
   logIn = userInfo => {
@@ -93,34 +134,52 @@ class App extends Component {
       userEmail: user.email,
       loggedIn: true
     });
-    // fetch(`https://pacific-sands-75155.herokuapp.com/api/auth/login`, {
-    //   method: "POST",
-    //   headers: new Headers({
-    //     "Content-Type": "application/json"
-    //   }),
-    //   body: JSON.stringify(user)
-    // })
-    //   .then(res => {
-    //     if (!res.ok) {
-    //       return res.json().then(e => Promise.reject(e));
-    //     } else {
-    //       return res.json();
-    //     }
-    //   })
-    //   .then(res => {
-    //     tokenService.create(res.token);
-    //     tokenService.storeUser(res.username);
-    //     this.setState({
-    //       userId: res.id,
-    //       userName: res.username,
-    //       userEmail: res.email,
-    //       loggedIn: true
-    //     });
-    //     this.fetchTours();
-    //   })
-    //   .catch(err => {
-    //     Swal.fire(err.error.message);
-    //   });
+    AuthApiService.postLogin(user);
+    fetch(`${config.API_ENDPOINT}/api/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "authorization": `${config.TOKEN_KEY}`
+      },
+      body: JSON.stringify(user)
+    })
+      .then(res => {
+        if (!res.ok) {
+          return res.json().then(e => Promise.reject(e));
+        } else {
+          return res.json();
+        }
+      })
+      .then(res => {
+        tokenService.create(res.token);
+        tokenService.storeUser(res.username);
+        this.setState({
+          userId: res.id,
+          userName: res.username,
+          userEmail: res.email,
+          loggedIn: true
+        });
+        this.fetchTours();
+      })
+      .catch(error => {
+        console.error({ error })
+      })
+  };
+
+  fetchPosts = () => {
+    fetch(`${config.API_ENDPOINT}/api/posts`, {
+      method: "Get",
+      headers: new Headers({
+        "Content-Type": "application/json"
+      })
+    })
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ posts: res });
+      })
+      .catch(err => {
+        this.setState({ posts: this.props.posts });
+      });
   };
 
   handleSignOut = () => {
@@ -131,7 +190,7 @@ class App extends Component {
       userLastName: "",
       userFirstName: ""
     });
-    // this.fetchTours();
+    this.fetchPosts()
   };
 
   render() {
@@ -160,17 +219,25 @@ class App extends Component {
             {backDrop}
 
             <section className="App-name-motto">
-              <h1>Welcome To upLift</h1>
-              <h2>Where we believe mentorship should be accessible to everyone.</h2>
+              <Route
+                // exact
+                path={'/landing'}
+                component={LandingPage}
+              />
             </section>
           </header>
           <main className="App__main">
-            {this.state.hasError && <p className="red">There was an error! Please try again.</p>}
+            {this.state.hasError === true && <p className="red">There was an error! Please try again.</p>}
             <Switch>
               <Route
                 exact
-                path={'/'}
+                path={'/posts'}
                 component={PostListPage}
+              />
+              <Route
+                exact
+                path={'/posts/:postId'}
+                component={PostPage}
               />
               <Route
                 path={'/login'}
@@ -180,14 +247,9 @@ class App extends Component {
                 path={'/signup'}
                 component={SignUpPage}
               />
-
-              <Route
-                path={'/post/:postId'}
-                component={PostPage}
-              />
-              <Route
+              {/* <Route
                 component={NotFoundPage}
-              />
+              /> */}
             </Switch>
           </main>
         </NavBarContext.Provider>

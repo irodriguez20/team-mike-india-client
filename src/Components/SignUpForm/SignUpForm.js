@@ -156,7 +156,7 @@ class SignUpForm extends React.Component {
                             </div>
                             <div className="overlay-panel overlay-right">
                                 <h1>Hello, Friend!</h1>
-                                <p>Join us and tour the world as a local</p>
+                                <p>Grow your intellectual network and gain the knowledge to advance your career</p>
                                 <button
                                     className="ghost"
                                     id="signUp"

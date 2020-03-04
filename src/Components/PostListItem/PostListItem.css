@@ -1,0 +1,23 @@
+.PostListItem__heading,
+.PostListItem__date,
+.PostListItem__footer {
+  color: #000638;
+}
+
+.PostListItem__heading {
+  text-align: left;
+  padding: 5px;
+  margin: 20px;
+}
+
+.PostListItem__header {
+  border: solid;
+  border-color: #000638;
+  border-radius: 8px;
+}
+
+.PostListItem__footer {
+  align-items: center;
+  padding: 5px;
+  margin-left: 15px;
+}

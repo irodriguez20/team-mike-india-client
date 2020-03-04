@@ -6,19 +6,20 @@ import StyleIcon from '../StyleIcon/StyleIcon'
 import './PostListItem.css'
 
 export default class PostListItem extends Component {
+
     render() {
         const { post } = this.props
         return (
-            <Link to={`/post/${post.id}`} className='PostListItem'>
+            <Link to={`/posts/${post.id}`} className='PostListItem'>
                 <header className='PostListItem__header'>
                     <h2 className='PostListItem__heading'>
-                        {post.title}
+                        {post.post}
                     </h2>
-                    <PostDate post={post} />
+                    <PostDate post={post.posted} />
                 </header>
                 <footer className='PostListItem__footer'>
                     <PostStyle post={post} />
-                    {post.author.id && <>
+                    {post.userid && <>
                         <Hyph />
                         <PostAuthor post={post} />
                     </>}
@@ -43,7 +44,7 @@ function PostDate({ post }) {
     return (
         <span className='PostListItem__date'>
             <NiceDate
-                date={post.date_created}
+                date={post.posted}
             />
         </span>
     )
@@ -52,7 +53,7 @@ function PostDate({ post }) {
 function PostAuthor({ post }) {
     return (
         <span className='PostListItem__author'>
-            {post.author.full_name}
+            {post.userid}
         </span>
     )
 }

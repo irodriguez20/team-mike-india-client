@@ -5,7 +5,7 @@ import { Section } from '../../Components/Utils/Utils'
 import PostListItem from '../../Components/PostListItem/PostListItem'
 
 export default class PostListPage extends Component {
-    static contextType = PostListContext
+    static contextType = PostListContext;
 
     componentDidMount() {
         this.context.clearError()
@@ -16,6 +16,7 @@ export default class PostListPage extends Component {
 
     renderPosts() {
         const { postList = [] } = this.context
+        console.log(this.context.post)
         return postList.map(post =>
             <PostListItem
                 key={post.id}

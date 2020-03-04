@@ -15,6 +15,7 @@ export default class PostPage extends Component {
     static contextType = PostContext
 
     componentDidMount() {
+        console.log(this.props.params.postId)
         const { postId } = this.props.match.params
         this.context.clearError()
         PostApiService.getPost(postId)
@@ -26,16 +27,16 @@ export default class PostPage extends Component {
     }
 
     componentWillUnmount() {
-        this.context.clearArticle()
+        this.context.clearPost()
     }
 
-    renderArticle() {
+    renderPost() {
         const { post, comments } = this.context
         return <>
-            <h2>{post.title}</h2>
+            {/* <h2>{post.title}</h2> */}
             <p>
                 <PostStyle post={post} />
-                {post.author.id && <>
+                {post.userid && <>
                     <Hyph />
                     <PostAuthor post={post} />
                 </>}
@@ -81,7 +82,7 @@ function PostStyle({ post }) {
 function PostAuthor({ post = nullPost }) {
     return (
         <span className='PostPage__author'>
-            {post.author.full_name}
+            {post.userid}
         </span>
     )
 }
@@ -89,7 +90,7 @@ function PostAuthor({ post = nullPost }) {
 function PostContent({ post }) {
     return (
         <p className='PostPage__content'>
-            {post.content}
+            {post.post}
         </p>
     )
 }
@@ -105,10 +106,10 @@ function PostComments({ comments = [] }) {
                             icon='quote-left'
                             className='PostPage__comment-icon blue'
                         />
-                        {comment.text}
+                        {comment.comment}
                     </p>
                     <p className='PostPage__comment-user'>
-                        {comment.user.full_name}
+                        {comment.userid}
                     </p>
                 </li>
             )}

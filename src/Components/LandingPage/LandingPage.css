@@ -1,0 +1,26 @@
+header h1 {
+  margin: 10px;
+  padding: 8px;
+}
+
+header h3 {
+  margin: 5px;
+  padding: 2px;
+}
+
+section.LandingPage__why {
+  text-align: left;
+  margin: 15px;
+  padding: 10px;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+a:link,
+a:visited {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}

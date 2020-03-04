@@ -19,7 +19,7 @@ class LogInForm extends React.Component {
 
         return (
             <main>
-                {this.state.routeToHome && <Redirect to="/home" />}
+                {this.state.routeToHome && <Redirect to="/posts" />}
                 <header role="banner">
                     <h2>Welcome Back!</h2>
                     <h4>Please log in</h4>

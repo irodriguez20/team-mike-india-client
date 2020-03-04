@@ -2,7 +2,7 @@ import React from "react";
 import "./NavBar.css";
 import { Link } from "react-router-dom";
 import DrawerToggleButton from "../sidedrawer/DrawerToggleButton";
-import Logo from '../../../src/logo.png';
+import Logo from '../../../src/logo_transparent.png';
 import NavBarContext from '../../contexts/NavBarContext';
 
 
@@ -16,7 +16,7 @@ class NavBar extends React.Component {
             <header className="toolbar">
                 <nav className="toolbar__navigation">
                     <div className="toolbar__logo">
-                        <Link to="/">
+                        <Link to="/landing">
                             <img src={Logo} alt="logo" />
                         </Link>
                     </div>
@@ -46,7 +46,7 @@ class NavBar extends React.Component {
                                 </>
                             ) : (
                                     <li>
-                                        <Link to="/signup">Sign Up</Link>
+                                        <Link to="/login">Sign In</Link>
                                     </li>
                                 )}
                         </ul>

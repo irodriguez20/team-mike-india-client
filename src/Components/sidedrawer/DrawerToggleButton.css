@@ -20,3 +20,7 @@
   height: 2px;
   background: white;
 }
+
+button.toggle-button:hover {
+  background: transparent;
+}
