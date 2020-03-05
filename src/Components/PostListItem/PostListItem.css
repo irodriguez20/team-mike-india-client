@@ -23,6 +23,10 @@
   max-width: 500px;
 }
 
+.PostListItem__header:hover {
+  background-color: #17cfcfe3;
+}
+
 .PostListItem__footer {
   align-items: center;
   padding: 5px;
