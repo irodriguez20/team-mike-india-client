@@ -1,9 +1,9 @@
 import React from 'react'
-import { format as formatDate } from 'date-fns'
+import { format } from 'date-fns'
 import './Utils.css'
 
-export function NiceDate({ date, format = 'Do MMMM YYYY' }) {
-    return formatDate(new Date(date, format))
+export function NiceDate({ date }) {
+    return format(new Date(date), 'do MMMM YYYY')
 }
 
 export function Hyph() {

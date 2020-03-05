@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { NiceDate, Hyph } from '../Utils/Utils'
+import { Hyph } from '../Utils/Utils'
 import StyleIcon from '../StyleIcon/StyleIcon'
 import './PostListItem.css'
+import { format } from 'date-fns'
 
 export default class PostListItem extends Component {
 
@@ -11,20 +12,22 @@ export default class PostListItem extends Component {
         const { post } = this.props
         return (
             <Link to={`/posts/${post.id}`} className='PostListItem'>
-                <header className='PostListItem__header'>
+                <main className='PostListItem__header'>
                     <h2 className='PostListItem__heading'>
                         {post.post}
                     </h2>
+                    {/* {post.posted} */}
                     <PostDate post={post.posted} />
-                </header>
-                <footer className='PostListItem__footer'>
-                    <PostStyle post={post} />
-                    {post.userid && <>
-                        <Hyph />
-                        <PostAuthor post={post} />
-                    </>}
-                    <PostCommentCount post={post} />
-                </footer>
+                    <section className='PostListItem__footer'>
+                        <PostStyle post={post} />
+                        {post.userid && <>
+                            <Hyph />
+                            <PostAuthor post={post} />
+                        </>}
+                        <PostCommentCount post={post} />
+                    </section>
+                </main>
+
             </Link>
         )
     }
@@ -41,11 +44,10 @@ function PostStyle({ post }) {
 }
 
 function PostDate({ post }) {
+    // let date = new Date(post.posted);
     return (
         <span className='PostListItem__date'>
-            <NiceDate
-                date={post.posted}
-            />
+            {format(new Date(post), "do MMM YYYY")}
         </span>
     )
 }

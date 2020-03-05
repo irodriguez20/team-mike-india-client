@@ -11,7 +11,7 @@ import PostListPage from '../../routes/PostListPage/PostListPage';
 import SideDrawer from '../../Components/sidedrawer/SideDrawer';
 import BackDrop from '../../Components/backdrop/BackDrop';
 import NavBarContext from '../../contexts/NavBarContext';
-import tokenService from '../../services/token-service';
+import { tokenService } from '../../services/token-service';
 import './App.css';
 import LandingPage from '../LandingPage/LandingPage';
 import AuthApiService from '../../services/auth-api-service';
@@ -23,7 +23,7 @@ class App extends Component {
     loggedIn: false,
     userId: "",
     userEmail: "",
-    userName: "",
+    userName: tokenService.userName,
     userFirstName: "",
     userLastName: "",
     token: tokenService.token,
@@ -135,7 +135,7 @@ class App extends Component {
       loggedIn: true
     });
     AuthApiService.postLogin(user);
-    fetch(`${config.API_ENDPOINT}/api/auth/login`, {
+    fetch(`${config.API_ENDPOINT}/api/auth/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -201,14 +201,15 @@ class App extends Component {
     }
 
     const navBarContextValue = {
+      loggedIn: this.state.loggedIn,
+      signUp: this.signUp,
+      logIn: this.logIn,
       drawerToggleClickHandler: this.drawerToggleClickHandler,
       backDropClickHandler: this.backDropClickHandler,
       userName: this.state.userName,
       userFirstName: this.state.userFirstName,
       userLastName: this.state.userLastName,
       handleSignOut: this.handleSignOut,
-      logIn: this.logIn,
-      signUp: this.signUp,
     }
     return (
       <div className="App" style={{ height: "100%" }}>
@@ -231,7 +232,7 @@ class App extends Component {
             <Switch>
               <Route
                 exact
-                path={'/posts'}
+                path={'/home'}
                 component={PostListPage}
               />
               <Route

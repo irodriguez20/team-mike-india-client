@@ -1,0 +1,20 @@
+form {
+  display: flex;
+  justify-items: space-between;
+  flex-direction: column;
+  padding: 15px;
+  align-items: center;
+  max-width: 500px;
+  border-radius: 8px;
+  color: #000638;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #000638;
+}
+
+textarea {
+  margin: 10px;
+  width: 200px;
+  height: 70px;
+  border-radius: 5px;
+}

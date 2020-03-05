@@ -1,21 +1,34 @@
-import config from '../config'
-
-const TokenService = {
-    saveAuthToken(token) {
-        window.localStorage.setItem(config.TOKEN_KEY, token)
-    },
-    getAuthToken() {
-        return window.localStorage.getItem(config.TOKEN_KEY)
-    },
-    clearAuthToken() {
-        window.localStorage.removeItem(config.TOKEN_KEY)
-    },
-    hasAuthToken() {
-        return !!TokenService.getAuthToken()
-    },
-    makeBasicAuthToken(userName, password) {
-        return window.btoa(`${userName}:${password}`)
-    },
+class TokenService {
+    TOKEN_KEY = "token";
+    USER_NAME = "userName";
+    token = null;
+    userName = null;
+    constructor() {
+        this.init();
+    }
+    init() {
+        this.find();
+        this.findUser();
+    }
+    find() {
+        this.token = localStorage.getItem(this.TOKEN_KEY);
+    }
+    create(token) {
+        this.token = token;
+        localStorage.setItem(this.TOKEN_KEY, token);
+    }
+    storeUser(userName) {
+        this.userName = userName;
+        localStorage.setItem(this.USER_NAME, userName);
+    }
+    findUser() {
+        this.userName = localStorage.getItem(this.USER_NAME);
+    }
+    remove() {
+        this.token = null;
+        this.userName = null;
+        localStorage.removeItem(this.TOKEN_KEY);
+        localStorage.removeItem(this.USER_NAME);
+    }
 }
-
-export default TokenService
+export const tokenService = new TokenService();

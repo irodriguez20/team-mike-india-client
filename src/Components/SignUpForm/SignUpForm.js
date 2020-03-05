@@ -10,7 +10,7 @@ class SignUpForm extends React.Component {
         last_name: "",
         email: "",
         password: "",
-        routeToHome: false,
+        // routeToHome: false,
         signUpToggle: "container"
     };
 
@@ -132,7 +132,7 @@ class SignUpForm extends React.Component {
                                         password: this.state.password
                                     };
                                     this.context.logIn(loginInfo);
-                                    this.setState({ routeToHome: this.context.loggedIn });
+                                    // this.setState({ routeToHome: this.context.loggedIn });
                                 }}
                             >
                                 Sign In

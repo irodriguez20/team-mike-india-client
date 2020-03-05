@@ -33,10 +33,14 @@ class NavBar extends React.Component {
                                         <Link to="/channels">Channels</Link>
                                     </li>
 
-                                    <li onClick={this.context.handleProfileLink}>
+                                    <li
+                                        onClick={() => {
+                                            this.context.handleProfileLink();
+                                        }}
+                                    >
                                         {" "}
                                         <Link to={this.linkToProfile}>
-                                            {this.context.username || "Profile"}
+                                            {this.context.userName || "Profile"}
                                         </Link>
                                     </li>
                                     <li onClick={this.context.handleSignOut}>
