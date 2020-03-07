@@ -10,10 +10,11 @@ import SignUpPage from '../../routes/SignUpPage/SignUpPage';
 import PostListPage from '../../routes/PostListPage/PostListPage';
 import SideDrawer from '../../Components/sidedrawer/SideDrawer';
 import BackDrop from '../../Components/backdrop/BackDrop';
-import NavBarContext from '../../contexts/NavBarContext';
+import NavBarContext, { nullPost } from '../../contexts/NavBarContext';
 import { tokenService } from '../../services/token-service';
 import './App.css';
 import LandingPage from '../LandingPage/LandingPage';
+import MainPage from '../MainPage/MainPage'
 import AuthApiService from '../../services/auth-api-service';
 import config from '../../config';
 
@@ -31,7 +32,10 @@ class App extends Component {
     channelsSearchResults: [],
     sideDrawerOpen: false,
     searchResults: [],
+    post: nullPost,
     posts: [],
+    postList: [],
+    error: null,
     // searchLocation: ""
   };
 
@@ -193,6 +197,39 @@ class App extends Component {
     this.fetchPosts()
   };
 
+  setPostList = postList => {
+    this.setState({ postList })
+  }
+
+  setError = error => {
+    console.error(error)
+    this.setState({ error })
+  }
+
+  clearError = () => {
+    this.setState({ error: null })
+  }
+
+  setPost = post => {
+    this.setState({ post })
+  }
+
+  setComments = comments => {
+    this.setState({ comments })
+  }
+
+  clearPost = () => {
+    this.setPost(nullPost)
+    this.setComments([])
+  }
+
+  addComment = comment => {
+    this.setComments([
+      ...this.state.comments,
+      comment
+    ])
+  }
+
   render() {
     let backDrop;
 
@@ -200,7 +237,7 @@ class App extends Component {
       backDrop = <BackDrop />;
     }
 
-    const navBarContextValue = {
+    const value = {
       loggedIn: this.state.loggedIn,
       signUp: this.signUp,
       logIn: this.logIn,
@@ -210,48 +247,39 @@ class App extends Component {
       userFirstName: this.state.userFirstName,
       userLastName: this.state.userLastName,
       handleSignOut: this.handleSignOut,
+      postList: this.state.postList,
+      error: this.state.error,
+      setError: this.setError,
+      clearError: this.clearError,
+      setPostList: this.setPostList,
+      post: this.state.post,
+      comments: this.state.comments,
+      setPost: this.setPost,
+      setComments: this.setComments,
+      clearPost: this.clearPost,
+      addComment: this.addComment,
+      userid: this.state.userId,
+      posts: this.state.posts,
     }
     return (
       <div className="App" style={{ height: "100%" }}>
-        <NavBarContext.Provider value={navBarContextValue}>
+        <NavBarContext.Provider value={value}>
           <header className="App-header">
             <NavBar drawerClickHandler={this.drawerToggleClickHandler} />
             <SideDrawer show={this.state.sideDrawerOpen} />
             {backDrop}
-
+            {/* 
             <section className="App-name-motto">
               <Route
                 // exact
                 path={'/landing'}
                 component={LandingPage}
               />
-            </section>
+            </section> */}
           </header>
           <main className="App__main">
             {this.state.hasError === true && <p className="red">There was an error! Please try again.</p>}
-            <Switch>
-              <Route
-                exact
-                path={'/home'}
-                component={PostListPage}
-              />
-              <Route
-                exact
-                path={'/posts/:postId'}
-                component={PostPage}
-              />
-              <Route
-                path={'/login'}
-                component={LoginPage}
-              />
-              <Route
-                path={'/signup'}
-                component={SignUpPage}
-              />
-              {/* <Route
-                component={NotFoundPage}
-              /> */}
-            </Switch>
+            <MainPage />
           </main>
         </NavBarContext.Provider>
       </div>

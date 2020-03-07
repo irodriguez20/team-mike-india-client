@@ -37,7 +37,7 @@ class SignUpForm extends React.Component {
 
         return (
             <main className="signUp__signIn">
-                {this.context.loggedIn && <Redirect to="/home" />}
+                {this.context.loggedIn && <Redirect to="/posts" />}
                 <div className={this.state.signUpToggle} id="container">
                     <div className="form-container sign-up-container">
                         <form action="#" className="signUp__signIn-form">

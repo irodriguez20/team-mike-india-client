@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { PostListProvider } from './contexts/PostListContext';
-import { PostProvider } from './contexts/PostContext';
 import './index.css';
 import App from './Components/App/App';
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -22,11 +20,9 @@ library.add(
 
 ReactDOM.render(
     <BrowserRouter>
-        <PostListProvider>
-            <PostProvider>
-                <App />
-            </PostProvider>
-        </PostListProvider>
+
+        <App />
+
     </BrowserRouter>,
     document.getElementById('root')
 );

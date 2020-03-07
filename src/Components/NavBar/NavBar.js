@@ -16,7 +16,7 @@ class NavBar extends React.Component {
             <header className="toolbar">
                 <nav className="toolbar__navigation">
                     <div className="toolbar__logo">
-                        <Link to="/landing">
+                        <Link to="/">
                             <img src={Logo} alt="logo" />
                         </Link>
                     </div>
@@ -27,7 +27,7 @@ class NavBar extends React.Component {
                             {this.context.loggedIn ? (
                                 <>
                                     <li>
-                                        <Link to="/home">Home</Link>
+                                        <Link to="/posts">Posts</Link>
                                     </li>
                                     <li>
                                         <Link to="/channels">Channels</Link>

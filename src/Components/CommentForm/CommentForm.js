@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import PostContext from '../../contexts/PostContext'
+import NavBarContext from '../../contexts/NavBarContext'
 import PostApiService from '../../services/post-api-service'
 import { Button, Textarea } from '../Utils/Utils'
 import './CommentForm.css'
 
 export default class CommentForm extends Component {
-    static contextType = PostContext
+    static contextType = NavBarContext
 
     handleSubmit = ev => {
         ev.preventDefault()
@@ -26,7 +26,7 @@ export default class CommentForm extends Component {
                 onSubmit={this.handleSubmit}
             >
                 <div className='text'>
-                    <Textarea
+                    <textarea
                         required
                         aria-label='Type a comment...'
                         name='text'
@@ -34,9 +34,9 @@ export default class CommentForm extends Component {
                         cols='30'
                         rows='3'
                         placeholder='Type a comment..'>
-                    </Textarea>
+                    </textarea>
                 </div>
-                <Button type='submit'>
+                <Button className='CommentForm__button' type='submit'>
                     Post comment
         </Button>
             </form>

@@ -1,71 +1,55 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import PostContext, { nullPost } from '../../contexts/PostContext'
+import NavBarContext, { nullPost } from '../../contexts/NavBarContext'
 import PostApiService from '../../services/post-api-service'
 import { NiceDate, Hyph, Section } from '../../Components/Utils/Utils'
 import StyleIcon from '../../Components/StyleIcon/StyleIcon'
 import CommentForm from '../../Components/CommentForm/CommentForm'
 import './PostPage.css'
+import PostListItem from '../../Components/PostListItem/PostListItem'
+import { format } from 'date-fns'
 
 export default class PostPage extends Component {
     static defaultProps = {
         match: { params: {} },
     }
 
-    static contextType = PostContext
-
-    componentDidMount() {
-        console.log(this.props.params.postId)
-        const { postId } = this.props.match.params
-        this.context.clearError()
-        PostApiService.getPost(postId)
-            .then(this.context.setPost)
-            .catch(this.context.setError)
-        PostApiService.getPostComments(postId)
-            .then(this.context.setComments)
-            .catch(this.context.setError)
-    }
-
-    componentWillUnmount() {
-        this.context.clearPost()
-    }
-
-    renderPost() {
-        const { post, comments } = this.context
-        return <>
-            {/* <h2>{post.title}</h2> */}
-            <p>
-                <PostStyle post={post} />
-                {post.userid && <>
-                    <Hyph />
-                    <PostAuthor post={post} />
-                </>}
-                <Hyph />
-                <NiceDate date={post.posted} />
-            </p>
-            <PostContent post={post} />
-            <PostComments comments={comments} />
-            <CommentForm />
-        </>
-    }
+    static contextType = NavBarContext
 
     render() {
-        const { error, post } = this.context
-        let content
-        if (error) {
-            content = (error.error === `Post doesn't exist`)
-                ? <p className='red'>Post not found</p>
-                : <p className='red'>There was an error</p>
-        } else if (!post.id) {
-            content = <div className='loading' />
-        } else {
-            content = this.renderPost()
+        // const { postList, comments } = this.context
+        const id = parseInt(this.props.match.params.postId);
+        const post = this.context.posts.find(po => po.id === id);
+        console.log(this.context.posts, id, post)
+
+        if (!post) {
+            return (
+                <div>
+                    <h1>Error 404</h1>
+                </div>
+            );
         }
+
         return (
-            <Section className='PostPage'>
-                {content}
-            </Section>
-        )
+            <>
+                <div className="PostPage__main">
+                    {/* <h2>{post.title}</h2> */}
+                    <p>
+                        {/* <PostListItem post={post} /> */}
+                        <PostStyle post={post} />
+                        {post.userid && <>
+                            <Hyph />
+                            <PostAuthor post={post} />
+                        </>}
+                        <Hyph />
+                        <PostDate date={post.posted} />
+                    </p>
+                    <PostContent post={post} />
+                    {/* <PostComments comments={comments} /> */}
+
+                </div>
+                <CommentForm />
+            </>)
     }
 }
 
@@ -79,7 +63,16 @@ function PostStyle({ post }) {
     )
 }
 
-function PostAuthor({ post = nullPost }) {
+function PostDate({ date }) {
+    // let date = new Date(post.posted);
+    return (
+        <span className='PostPage__date'>
+            {format(new Date(date), "do MMM YYYY")}
+        </span>
+    )
+}
+
+function PostAuthor({ post }) {
     return (
         <span className='PostPage__author'>
             {post.userid}
@@ -88,6 +81,7 @@ function PostAuthor({ post = nullPost }) {
 }
 
 function PostContent({ post }) {
+
     return (
         <p className='PostPage__content'>
             {post.post}
