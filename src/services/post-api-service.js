@@ -27,8 +27,20 @@ const PostApiService = {
                     : res.json()
             )
     },
-    getPostComments(postId) {
+    getComments() {
         return fetch(`${config.API_ENDPOINT}/api/comments`, {
+            headers: {
+                'authorization': `bearer ${config.TOKEN_KEY}`,
+            },
+        })
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            )
+    },
+    getComment(commentId) {
+        return fetch(`${config.API_ENDPOINT}/api/comments/${commentId}`, {
             headers: {
                 'authorization': `bearer ${config.TOKEN_KEY}`,
             },

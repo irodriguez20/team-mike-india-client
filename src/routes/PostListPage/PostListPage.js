@@ -28,6 +28,7 @@ export default class PostListPage extends Component {
         PostApiService.getPosts()
             .then(this.context.setPostList)
             .catch(this.context.setError)
+
     }
 
     renderPosts() {

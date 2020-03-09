@@ -8,6 +8,7 @@ import CommentForm from '../../Components/CommentForm/CommentForm'
 import './PostPage.css'
 import PostListItem from '../../Components/PostListItem/PostListItem'
 import { format } from 'date-fns'
+import Comments from '../../Components/Comments/Comments'
 
 export default class PostPage extends Component {
     static defaultProps = {
@@ -20,7 +21,8 @@ export default class PostPage extends Component {
         // const { postList, comments } = this.context
         const id = parseInt(this.props.match.params.postId);
         const post = this.context.posts.find(po => po.id === id);
-        console.log(this.context.posts, id, post)
+        const comments = this.context.comments;
+        console.log(comments)
 
         if (!post) {
             return (
@@ -45,7 +47,7 @@ export default class PostPage extends Component {
                         <PostDate date={post.posted} />
                     </p>
                     <PostContent post={post} />
-                    {/* <PostComments comments={comments} /> */}
+                    <Comments postId={post.id} />
 
                 </div>
                 <CommentForm />
@@ -89,24 +91,27 @@ function PostContent({ post }) {
     )
 }
 
-function PostComments({ comments = [] }) {
-    return (
-        <ul className='PostPage__comment-list'>
-            {comments.map(comment =>
-                <li key={comment.id} className='PostPage__comment'>
-                    <p className='PostPage__comment-text'>
-                        <FontAwesomeIcon
-                            size='lg'
-                            icon='quote-left'
-                            className='PostPage__comment-icon blue'
-                        />
-                        {comment.comment}
-                    </p>
-                    <p className='PostPage__comment-user'>
-                        {comment.userid}
-                    </p>
-                </li>
-            )}
-        </ul>
-    )
-}
+// function PostComments({ postId, comments }) {
+//     // const id = parseInt(this.props.match.params.postId);
+//     const commentsList = comments.find(comment => comment.postid === postId);
+//     console.log(commentsList)
+//     return (
+//         <ul className='PostPage__comment-list'>
+//             {commentsList.map(comment =>
+//                 <li key={comment.id} className='PostPage__comment'>
+//                     <p className='PostPage__comment-text'>
+//                         <FontAwesomeIcon
+//                             size='lg'
+//                             icon='quote-left'
+//                             className='PostPage__comment-icon blue'
+//                         />
+//                         {comment.comment}
+//                     </p>
+//                     <p className='PostPage__comment-user'>
+//                         {comment.userid}
+//                     </p>
+//                 </li>
+//             )}
+//         </ul>
+//     )
+// }

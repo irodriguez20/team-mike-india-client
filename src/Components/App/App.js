@@ -35,6 +35,8 @@ class App extends Component {
     post: nullPost,
     posts: [],
     postList: [],
+    comments: [],
+    commentsList: [],
     error: null,
     // searchLocation: ""
   };
@@ -81,12 +83,14 @@ class App extends Component {
             userEmail: res.useremail
           });
           this.fetchPosts();
+          this.fetchComments();
         })
         .catch(err => {
           console.error({ err });
         });
     } else {
       this.fetchPosts();
+      this.fetchComments();
     }
   }
 
@@ -119,6 +123,7 @@ class App extends Component {
         };
         this.logIn(user);
         this.fetchPosts();
+        this.fetchComments();
       })
       .catch(error => {
         console.error({ error })
@@ -163,7 +168,8 @@ class App extends Component {
           userEmail: res.email,
           loggedIn: true
         });
-        this.fetchTours();
+        this.fetchPosts();
+        this.fetchComments();
       })
       .catch(error => {
         console.error({ error })
@@ -186,6 +192,22 @@ class App extends Component {
       });
   };
 
+  fetchComments = () => {
+    fetch(`${config.API_ENDPOINT}/api/comments`, {
+      method: "Get",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ comments: res });
+      })
+      .catch(err => {
+        this.setState({ comments: this.props.comments });
+      });
+  };
+
   handleSignOut = () => {
     tokenService.remove();
     this.setState({
@@ -195,6 +217,7 @@ class App extends Component {
       userFirstName: ""
     });
     this.fetchPosts()
+    this.fetchComments();
   };
 
   setPostList = postList => {
@@ -216,6 +239,9 @@ class App extends Component {
 
   setComments = comments => {
     this.setState({ comments })
+  }
+  setCommentsList = commentsList => {
+    this.setState({ commentsList })
   }
 
   clearPost = () => {
@@ -248,6 +274,7 @@ class App extends Component {
       userLastName: this.state.userLastName,
       handleSignOut: this.handleSignOut,
       postList: this.state.postList,
+      commentsList: this.state.commentsList,
       error: this.state.error,
       setError: this.setError,
       clearError: this.clearError,
@@ -256,6 +283,7 @@ class App extends Component {
       comments: this.state.comments,
       setPost: this.setPost,
       setComments: this.setComments,
+      setCommentsList: this.setCommentsList,
       clearPost: this.clearPost,
       addComment: this.addComment,
       userid: this.state.userId,

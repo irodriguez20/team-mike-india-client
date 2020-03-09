@@ -19,6 +19,8 @@ const NavBarContext = React.createContext({
     userid: '',
     postList: [],
     posts: [],
+    comments: [],
+    commentsList: [],
     error: null,
     setError: () => { },
     clearError: () => { },
@@ -28,6 +30,7 @@ const NavBarContext = React.createContext({
     setPost: () => { },
     clearPost: () => { },
     setComments: () => { },
+    setCommentsList: () => { },
     addComment: () => { },
 })
 
