@@ -3,11 +3,16 @@ import NavBarContext from '../../contexts/NavBarContext';
 import { Section } from '../Utils/Utils';
 import CommentsItem from '../../Components/CommentsItem/CommentsItem';
 import PostApiService from '../../services/post-api-service';
+import PropTypes from 'prop-types';
 import { getCommentsForPost } from '../../services/helperFunctions';
 
 class Comments extends Component {
     static defaultProps = {
         match: { params: {} },
+    }
+    state = {
+        userid: this.context.userid,
+        userName: this.context.userName,
     }
 
     static contextType = NavBarContext;
@@ -30,6 +35,7 @@ class Comments extends Component {
 
         return (
             <>
+                <h3>Comments</h3>
                 {commentsForPost.map(comment =>
                     <CommentsItem
                         key={comment.id}

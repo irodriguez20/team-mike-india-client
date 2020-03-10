@@ -1,5 +1,5 @@
-export const countCommentsForPost = (comments = [], postId, ) =>
-    comments.filter(comment => parseInt(comment.postid) === parseInt(postId)).length
+export const countCommentsForPost = (comments = [], postId) =>
+    comments.filter(comment => comment.postid == postId).length
 
 export const getCommentsForPost = (comments = [], postId) => {
 
@@ -12,7 +12,7 @@ export const getCommentsForPost = (comments = [], postId) => {
             // eslint-disable-next-line
             let comment = comments[i]
             // eslint-disable-next-line
-            if (parseInt(comment.postid) === parseInt(postId))
+            if (comment.postid == postId)
                 result.push(comment)
         }
     }

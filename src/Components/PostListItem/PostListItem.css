@@ -31,3 +31,7 @@
   align-items: center;
   padding: 5px;
 }
+
+ul {
+  list-style: none;
+}

@@ -12,7 +12,6 @@ export default class CommentsItem extends Component {
         return (
             <Link to={`/comments/${comment.id}`} className='CommentsItem'>
                 <main className='CommentsItem__header'>
-                    <h3>Comments</h3>
                     <p className='CommentsItem__heading'>
                         {comment.comment}
                     </p>

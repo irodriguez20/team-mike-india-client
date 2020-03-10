@@ -48,7 +48,7 @@ export default class PostListPage extends Component {
             userid: this.context.userid,
             // posted: postInfo.posted,
         };
-        console.log(newPost)
+
         fetch(`${config.API_ENDPOINT}/api/posts`, {
             method: "POST",
             headers: new Headers({
@@ -61,7 +61,9 @@ export default class PostListPage extends Component {
                 if (!res.ok) {
                     return res.json().then(e => Promise.reject(e));
                 }
-                this.renderPosts();
+                this.props.history.push('/posts');
+                // this.renderPosts();
+
             })
             .catch(err => {
                 console.error({ err });

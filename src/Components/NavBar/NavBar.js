@@ -9,7 +9,7 @@ import NavBarContext from '../../contexts/NavBarContext';
 class NavBar extends React.Component {
     static contextType = NavBarContext;
 
-    linkToProfile = `/users/${this.context.username}`;
+    linkToProfile = `/users/${this.context.userName}`;
 
     render() {
         return (

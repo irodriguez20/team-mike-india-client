@@ -62,7 +62,7 @@ class App extends Component {
         userName: this.state.userName
       };
 
-      fetch(`${config.API_ENDPOINT}/api/auth/`, {
+      fetch(`${config.API_ENDPOINT}/api/auth/login`, {
         method: "POST",
         headers: new Headers({
           "Content-Type": "application/json",
@@ -144,7 +144,7 @@ class App extends Component {
       loggedIn: true
     });
     AuthApiService.postLogin(user);
-    fetch(`${config.API_ENDPOINT}/api/auth/`, {
+    fetch(`${config.API_ENDPOINT}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -250,11 +250,22 @@ class App extends Component {
   }
 
   addComment = comment => {
-    this.setComments([
-      ...this.state.comments,
-      comment
-    ])
+    this.setComments({
+      comments: [
+        ...this.state.comments,
+        comment
+      ]
+    })
   }
+
+  // handleAddRecipe = recipe => {
+  //   this.setState({
+  //     recipes: [
+  //       ...this.state.recipes,
+  //       recipe
+  //     ]
+  //   })
+  // }
 
   render() {
     let backDrop;

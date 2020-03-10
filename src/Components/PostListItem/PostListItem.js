@@ -19,13 +19,14 @@ export default class PostListItem extends Component {
                     </h2>
                     {/* {post.posted} */}
                     <PostDate post={post.posted} />
-                    <section className='PostListItem__footer'>
-                        <PostStyle post={post} />
-                        {post.userid && <>
-                            <Hyph />
-                            <PostAuthor post={post} />
-                        </>}
-                        <span
+                    <ul className='PostListItem__footer'>
+                        <li><PostStyle post={post} />
+                            {post.userid && <>
+                                <Hyph />
+                                <PostAuthor post={post} />
+                            </>}
+                        </li>
+                        <li> <span
                             className='PostListItem__comment-count fa-layers fa-fw'
                         >
                             <FontAwesomeIcon size='lg' icon='comment' />
@@ -34,7 +35,8 @@ export default class PostListItem extends Component {
                                 {countCommentsForPost(comments, post.id)}
                             </span>
                         </span>
-                    </section>
+                        </li>
+                    </ul>
                 </main>
 
             </Link>
@@ -69,16 +71,4 @@ function PostAuthor({ post }) {
     )
 }
 
-// function PostCommentCount({ post }) {
-//     return (
-//         <span
-//             className='PostListItem__comment-count fa-layers fa-fw'
-//         >
-//             <FontAwesomeIcon size='lg' icon='comment' />
-//             <span
-//                 className='fa-layers-text fa-inverse'>
-//                 {post.number_of_comments}
-//             </span>
-//         </span>
-//     )
-// }
+

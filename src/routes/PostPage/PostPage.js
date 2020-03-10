@@ -15,7 +15,6 @@ export default class PostPage extends Component {
     static contextType = NavBarContext
 
     render() {
-        // const { postList, comments } = this.context
         const id = parseInt(this.props.match.params.postId);
         const post = this.context.posts.find(po => po.id === id);
         const comments = this.context.comments;
@@ -32,9 +31,7 @@ export default class PostPage extends Component {
         return (
             <>
                 <div className="PostPage__main">
-                    {/* <h2>{post.title}</h2> */}
                     <p>
-                        {/* <PostListItem post={post} /> */}
                         <PostStyle post={post} />
                         {post.userid && <>
                             <Hyph />
@@ -45,7 +42,7 @@ export default class PostPage extends Component {
                     </p>
                     <PostContent post={post} />
                 </div>
-                <CommentForm />
+                <CommentForm postId={post.id} />
                 <Comments postId={post.id} />
 
             </>)
@@ -63,7 +60,6 @@ function PostStyle({ post }) {
 }
 
 function PostDate({ date }) {
-    // let date = new Date(post.posted);
     return (
         <span className='PostPage__date'>
             {format(new Date(date), "do MMM YYYY")}
