@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import NavBarContext, { nullPost } from '../../contexts/NavBarContext'
-import PostApiService from '../../services/post-api-service'
-import { NiceDate, Hyph, Section } from '../../Components/Utils/Utils'
+import NavBarContext from '../../contexts/NavBarContext'
+import { Hyph } from '../../Components/Utils/Utils'
 import StyleIcon from '../../Components/StyleIcon/StyleIcon'
 import CommentForm from '../../Components/CommentForm/CommentForm'
 import './PostPage.css'
-import PostListItem from '../../Components/PostListItem/PostListItem'
 import { format } from 'date-fns'
 import Comments from '../../Components/Comments/Comments'
 
@@ -47,10 +44,10 @@ export default class PostPage extends Component {
                         <PostDate date={post.posted} />
                     </p>
                     <PostContent post={post} />
-                    <Comments postId={post.id} />
-
                 </div>
                 <CommentForm />
+                <Comments postId={post.id} />
+
             </>)
     }
 }
@@ -91,27 +88,4 @@ function PostContent({ post }) {
     )
 }
 
-// function PostComments({ postId, comments }) {
-//     // const id = parseInt(this.props.match.params.postId);
-//     const commentsList = comments.find(comment => comment.postid === postId);
-//     console.log(commentsList)
-//     return (
-//         <ul className='PostPage__comment-list'>
-//             {commentsList.map(comment =>
-//                 <li key={comment.id} className='PostPage__comment'>
-//                     <p className='PostPage__comment-text'>
-//                         <FontAwesomeIcon
-//                             size='lg'
-//                             icon='quote-left'
-//                             className='PostPage__comment-icon blue'
-//                         />
-//                         {comment.comment}
-//                     </p>
-//                     <p className='PostPage__comment-user'>
-//                         {comment.userid}
-//                     </p>
-//                 </li>
-//             )}
-//         </ul>
-//     )
-// }
+

@@ -3,28 +3,15 @@ import NavBarContext from '../../contexts/NavBarContext';
 import { Section } from '../Utils/Utils';
 import CommentsItem from '../../Components/CommentsItem/CommentsItem';
 import PostApiService from '../../services/post-api-service';
-import PropTypes from 'prop-types';
+import { getCommentsForPost } from '../../services/helperFunctions';
 
 class Comments extends Component {
-    // static defaultProps = {
-    //     match: { params: {} },
-    // }
-    static propTypes = {
-        history: PropTypes.shape({
-            push: () => { },
-            match: { params: {} },
-        }).isRequired,
-    };
+    static defaultProps = {
+        match: { params: {} },
+    }
 
     static contextType = NavBarContext;
 
-    findComments = ({ commentsList, postId }) => {
-        console.log(commentsList)
-        commentsList.find(comment => comment.postid === postId)
-        // if (comment.postid === id) {
-        //     commentsList.push()
-        // }
-    }
 
     componentDidMount() {
         this.context.clearError()
@@ -33,21 +20,22 @@ class Comments extends Component {
             .catch(this.context.setError)
 
         console.log(this.context.comments)
+
     }
 
     renderComments() {
-        const { commentsList = [] } = this.context
-        const postId = parseInt(postId);
+        const { comments = [] } = this.context
+        const postId = parseInt(this.props.postId);
+        const commentsForPost = getCommentsForPost(comments, postId);
 
-        console.log('renderComments()', commentsList);
-
-        this.findComments({ commentsList, postId })
-
-        return commentsList.map(comment =>
-            <CommentsItem
-                key={comment.id}
-                comment={comment}
-            />
+        return (
+            <>
+                {commentsForPost.map(comment =>
+                    <CommentsItem
+                        key={comment.id}
+                        comment={comment}
+                    />)}
+            </>
         )
     }
 

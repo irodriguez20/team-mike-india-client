@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Hyph } from '../Utils/Utils'
 import StyleIcon from '../StyleIcon/StyleIcon'
+import { countCommentsForPost } from '../../services/helperFunctions';
 import './PostListItem.css'
 import { format } from 'date-fns'
 
 export default class PostListItem extends Component {
 
     render() {
-        const { post } = this.props
+        const { post, comments } = this.props
         return (
             <Link to={`/posts/${post.id}`} className='PostListItem'>
                 <main className='PostListItem__header'>
@@ -24,7 +25,15 @@ export default class PostListItem extends Component {
                             <Hyph />
                             <PostAuthor post={post} />
                         </>}
-                        <PostCommentCount post={post} />
+                        <span
+                            className='PostListItem__comment-count fa-layers fa-fw'
+                        >
+                            <FontAwesomeIcon size='lg' icon='comment' />
+                            <span
+                                className='fa-layers-text fa-inverse'>
+                                {countCommentsForPost(comments, post.id)}
+                            </span>
+                        </span>
                     </section>
                 </main>
 
@@ -60,16 +69,16 @@ function PostAuthor({ post }) {
     )
 }
 
-function PostCommentCount({ post }) {
-    return (
-        <span
-            className='PostListItem__comment-count fa-layers fa-fw'
-        >
-            <FontAwesomeIcon size='lg' icon='comment' />
-            <span
-                className='fa-layers-text fa-inverse'>
-                {post.number_of_comments}
-            </span>
-        </span>
-    )
-}
+// function PostCommentCount({ post }) {
+//     return (
+//         <span
+//             className='PostListItem__comment-count fa-layers fa-fw'
+//         >
+//             <FontAwesomeIcon size='lg' icon='comment' />
+//             <span
+//                 className='fa-layers-text fa-inverse'>
+//                 {post.number_of_comments}
+//             </span>
+//         </span>
+//     )
+// }

@@ -12,9 +12,10 @@ export default class CommentsItem extends Component {
         return (
             <Link to={`/comments/${comment.id}`} className='CommentsItem'>
                 <main className='CommentsItem__header'>
-                    <h2 className='CommentsItem__heading'>
+                    <h3>Comments</h3>
+                    <p className='CommentsItem__heading'>
                         {comment.comment}
-                    </h2>
+                    </p>
                     {/* {post.posted} */}
                     <CommentDate comment={comment.posted} />
                     <section className='CommentsItem__footer'>

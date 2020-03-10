@@ -4,7 +4,6 @@ import { Section } from '../../Components/Utils/Utils'
 import PostListItem from '../../Components/PostListItem/PostListItem'
 import config from '../../config';
 import PropTypes from 'prop-types';
-import { tokenService } from '../../services/token-service';
 import NavBarContext from '../../contexts/NavBarContext';
 import './PostListPage.css'
 
@@ -32,12 +31,13 @@ export default class PostListPage extends Component {
     }
 
     renderPosts() {
-        const { postList = [] } = this.context
+        const { postList = [], comments = [] } = this.context
         // console.log(this.props)
         return postList.map(post =>
             <PostListItem
                 key={post.id}
                 post={post}
+                comments={comments}
             />
         )
     }

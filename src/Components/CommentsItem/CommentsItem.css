@@ -1,0 +1,9 @@
+.CommentsItem__header {
+  display: flex;
+  flex-direction: column;
+  color: #000638;
+  font-weight: normal;
+  margin: 15px;
+  background-color: #17cfcf77;
+  border-radius: 8px;
+}
