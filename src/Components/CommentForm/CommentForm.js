@@ -43,7 +43,7 @@ export default class CommentForm extends Component {
             .then(comment => {
                 comment.value = "";
                 this.context.addComment(comment);
-                this.props.history.push(`posts/${postId}`);
+                // this.props.history.push(`posts/${postId}`);
             })
             .catch(error => {
                 console.log({ error });
