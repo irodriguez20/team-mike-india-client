@@ -60,10 +60,10 @@ class App extends Component {
     if (this.state.token !== null && this.state.userName !== null) {
       const loggedInUser = {
         userName: this.state.userName,
-        token: this.state.token
+        // token: this.state.token,
       };
 
-      fetch(`${config.API_ENDPOINT}/api/auth/login`, {
+      fetch(`${config.API_ENDPOINT}/api/auth`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,11 +77,12 @@ class App extends Component {
           console.log(res);
           this.setState({
             loggedIn: true,
-            // userId: res.id,
-            // userLastName: res.lastName,
-            // userFirstName: res.firstName,
-            userName: res.userName,
-            token: res.token
+            userId: res.id,
+            userLastName: res.lastName,
+            userFirstName: res.firstName,
+            userName: res.username,
+            token: res.token,
+            email: res.email,
           });
           this.fetchPosts();
           this.fetchComments();
@@ -146,7 +147,7 @@ class App extends Component {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "authorization": `${config.TOKEN_KEY}`
+        // "authorization": `${config.TOKEN_KEY}`
       },
       body: JSON.stringify(userInfo)
     })
