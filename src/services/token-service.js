@@ -7,28 +7,31 @@ class TokenService {
         this.init();
     }
     init() {
-        this.find();
+        this.findToken();
         this.findUser();
     }
-    find() {
-        this.token = localStorage.getItem(this.TOKEN_KEY);
+    findToken() {
+        this.token = window.localStorage.getItem(this.TOKEN_KEY);
     }
     create(token) {
         this.token = token;
-        localStorage.setItem(this.TOKEN_KEY, token);
+        window.localStorage.setItem(this.TOKEN_KEY, token);
     }
     storeUser(userName) {
         this.userName = userName;
-        localStorage.setItem(this.USER_NAME, userName);
+        window.localStorage.setItem(this.USER_NAME, userName);
     }
     findUser() {
-        this.userName = localStorage.getItem(this.USER_NAME);
+        this.userName = window.localStorage.getItem(this.USER_NAME);
+    }
+    hasAuthToken() {
+        return !!this.findToken()
     }
     remove() {
         this.token = null;
         this.userName = null;
-        localStorage.removeItem(this.TOKEN_KEY);
-        localStorage.removeItem(this.USER_NAME);
+        window.localStorage.removeItem(this.TOKEN_KEY);
+        window.localStorage.removeItem(this.USER_NAME);
     }
 }
 export const tokenService = new TokenService();

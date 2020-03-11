@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import NavBarContext from '../../contexts/NavBarContext'
-import PostApiService from '../../services/post-api-service'
+// import PostApiService from '../../services/post-api-service'
 import PropTypes from 'prop-types';
 import { Button } from '../Utils/Utils'
 import config from '../../config'
 import './CommentForm.css'
-import { tokenService } from '../../services/token-service';
+// import { tokenService } from '../../services/token-service';
 
 export default class CommentForm extends Component {
     static propTypes = {
@@ -43,7 +43,7 @@ export default class CommentForm extends Component {
             .then(comment => {
                 comment.value = "";
                 this.context.addComment(comment);
-                // this.props.history.push(`posts/${postId}`);
+                this.props.push(`posts/${postId}`);
             })
             .catch(error => {
                 console.log({ error });

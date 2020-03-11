@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+// import { Route, Switch } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
-import PrivateRoute from '../Utils/PrivateRoute';
-import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
-import PostPage from '../../routes/PostPage/PostPage';
-import LoginPage from '../../routes/LoginPage/LoginPage';
-import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage';
-import SignUpPage from '../../routes/SignUpPage/SignUpPage';
-import PostListPage from '../../routes/PostListPage/PostListPage';
+// import PrivateRoute from '../Utils/PrivateRoute';
+// import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
+// import PostPage from '../../routes/PostPage/PostPage';
+// import LoginPage from '../../routes/LoginPage/LoginPage';
+// import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage';
+// import SignUpPage from '../../routes/SignUpPage/SignUpPage';
+// import PostListPage from '../../routes/PostListPage/PostListPage';
 import SideDrawer from '../../Components/sidedrawer/SideDrawer';
 import BackDrop from '../../Components/backdrop/BackDrop';
 import NavBarContext, { nullPost } from '../../contexts/NavBarContext';
 import { tokenService } from '../../services/token-service';
 import './App.css';
-import LandingPage from '../LandingPage/LandingPage';
+// import LandingPage from '../LandingPage/LandingPage';
 import MainPage from '../MainPage/MainPage'
 import AuthApiService from '../../services/auth-api-service';
 import config from '../../config';
@@ -23,7 +23,7 @@ class App extends Component {
     hasError: false,
     loggedIn: false,
     userId: "",
-    userEmail: "",
+    email: "",
     userName: tokenService.userName,
     userFirstName: "",
     userLastName: "",
@@ -59,14 +59,15 @@ class App extends Component {
   componentDidMount() {
     if (this.state.token !== null && this.state.userName !== null) {
       const loggedInUser = {
-        userName: this.state.userName
+        userName: this.state.userName,
+        token: this.state.token
       };
 
       fetch(`${config.API_ENDPOINT}/api/auth/login`, {
         method: "POST",
-        headers: new Headers({
+        headers: {
           "Content-Type": "application/json",
-        }),
+        },
         body: JSON.stringify(loggedInUser)
       })
         .then(res => {
@@ -76,11 +77,11 @@ class App extends Component {
           console.log(res);
           this.setState({
             loggedIn: true,
-            userId: res.id,
-            userLastName: res.lastName,
-            userFirstName: res.firstName,
+            // userId: res.id,
+            // userLastName: res.lastName,
+            // userFirstName: res.firstName,
             userName: res.userName,
-            userEmail: res.useremail
+            token: res.token
           });
           this.fetchPosts();
           this.fetchComments();
@@ -96,28 +97,27 @@ class App extends Component {
 
   signUp = userInfo => {
     const newUser = {
-      username: userInfo.userName,
-      f_name: userInfo.f_name,
-      l_name: userInfo.l_name,
+      username: userInfo.username,
+      first_name: userInfo.first_name,
+      last_name: userInfo.last_name,
       email: userInfo.email,
       password: userInfo.password
     };
 
-    this.logIn(newUser);
+    // this.logIn(newUser);
     fetch(`${config.API_ENDPOINT}/api/users`, {
       method: "POST",
-      headers: new Headers({
+      body: JSON.stringify(newUser),
+      headers: {
         "Content-Type": "application/json",
-        "auth": `${config.TOKEN_KEY}`
-      }),
-      body: JSON.stringify(newUser)
+        // "auth": `${config.TOKEN_KEY}`
+      },
     })
       .then(res => {
         return res.json();
       })
       .then(res => {
         const user = {
-          user_name: res.username,
           email: res.email,
           password: res.password
         };
@@ -131,26 +131,24 @@ class App extends Component {
   };
 
   logIn = userInfo => {
-    const user = {
-      username: userInfo.user_name,
-      email: userInfo.email,
-      password: userInfo.password
-    };
+    // const user = {
+    //   email: userInfo.email,
+    //   password: userInfo.password
+    // };
 
     this.setState({
-      userId: user.id,
-      userName: user.username,
-      userEmail: user.email,
+      // userId: user.id,
+      email: userInfo.email,
       loggedIn: true
     });
-    AuthApiService.postLogin(user);
+    AuthApiService.postLogin(userInfo);
     fetch(`${config.API_ENDPOINT}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "authorization": `${config.TOKEN_KEY}`
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(userInfo)
     })
       .then(res => {
         if (!res.ok) {
@@ -165,7 +163,7 @@ class App extends Component {
         this.setState({
           userId: res.id,
           userName: res.username,
-          userEmail: res.email,
+          email: res.email,
           loggedIn: true
         });
         this.fetchPosts();
@@ -191,6 +189,15 @@ class App extends Component {
         this.setState({ posts: this.props.posts });
       });
   };
+
+  handleAddPost = post => {
+    this.setState({
+      posts: [
+        ...this.state.posts,
+        post
+      ]
+    })
+  }
 
   fetchComments = () => {
     fetch(`${config.API_ENDPOINT}/api/comments`, {
@@ -297,6 +304,7 @@ class App extends Component {
       setCommentsList: this.setCommentsList,
       clearPost: this.clearPost,
       addComment: this.addComment,
+      addPost: this.handleAddPost,
       userid: this.state.userId,
       posts: this.state.posts,
     }

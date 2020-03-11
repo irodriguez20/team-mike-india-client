@@ -8,7 +8,7 @@ export const getCommentsForPost = (comments = [], postId) => {
     if (postId) {
         result = []
         // eslint-disable-next-line
-        for (var i = 0; i < comments.length; ++i) {
+        for (let i = 0; i < comments.length; ++i) {
             // eslint-disable-next-line
             let comment = comments[i]
             // eslint-disable-next-line

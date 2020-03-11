@@ -10,7 +10,6 @@ class SignUpForm extends React.Component {
         last_name: "",
         email: "",
         password: "",
-        // routeToHome: false,
         signUpToggle: "container"
     };
 
@@ -29,8 +28,8 @@ class SignUpForm extends React.Component {
     render() {
         const userInfo = {
             username: this.state.username,
-            f_name: this.state.first_name,
-            l_name: this.state.last_name,
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
             email: this.state.email,
             password: this.state.password
         };
@@ -58,16 +57,16 @@ class SignUpForm extends React.Component {
                                 placeholder="First name"
                                 type="text"
                                 required
-                                name="first-name"
-                                id="first-name"
+                                name="first_name"
+                                id="first_name"
                                 onChange={e => this.setState({ first_name: e.target.value })}
                             />
                             <input
                                 placeholder="Last name"
                                 required
                                 type="text"
-                                name="last-name"
-                                id="last-name"
+                                name="last_name"
+                                id="last_name"
                                 onChange={e => this.setState({ last_name: e.target.value })}
                             />
                             <input

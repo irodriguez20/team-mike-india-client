@@ -32,6 +32,7 @@ const NavBarContext = React.createContext({
     setComments: () => { },
     setCommentsList: () => { },
     addComment: () => { },
+    addPost: () => { },
 })
 
 export default NavBarContext;

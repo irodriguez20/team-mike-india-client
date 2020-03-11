@@ -7,18 +7,18 @@ import PropTypes from 'prop-types';
 import NavBarContext from '../../contexts/NavBarContext';
 import './PostListPage.css'
 
-export default class PostListPage extends Component {
+class PostListPage extends Component {
     static propTypes = {
         history: PropTypes.shape({
             push: () => { }
         }).isRequired,
     };
-    state = {
-        post: "",
-        userid: this.context.userid,
-        // posted: new Date(),
-        routeToHome: false,
-    };
+    // state = {
+    //     post: "",
+    //     userid: this.context.userid,
+    //     // posted: new Date(),
+    //     routeToHome: false,
+    // };
     static contextType = NavBarContext;
 
 
@@ -42,28 +42,35 @@ export default class PostListPage extends Component {
         )
     }
 
-    addPost = postInfo => {
+    handleSubmit = e => {
+        e.preventDefault();
+
+        const { post } = e.target;
         const newPost = {
-            post: postInfo.post,
+            post: post.value,
             userid: this.context.userid,
             // posted: postInfo.posted,
         };
 
         fetch(`${config.API_ENDPOINT}/api/posts`, {
             method: "POST",
-            headers: new Headers({
-                "Content-Type": "application/json",
+            body: JSON.stringify(newPost),
+            headers: {
+                "content-type": "application/json",
                 "auth": `${config.TOKEN_KEY}`
-            }),
-            body: JSON.stringify(newPost)
+            },
         })
             .then(res => {
                 if (!res.ok) {
                     return res.json().then(e => Promise.reject(e));
                 }
-                this.props.history.push('/posts');
+                return res.json()
                 // this.renderPosts();
-
+            })
+            .then(post => {
+                post.value = "";
+                this.context.addPost(post);
+                this.props.history.push('/');
             })
             .catch(err => {
                 console.error({ err });
@@ -72,34 +79,36 @@ export default class PostListPage extends Component {
 
     render() {
         const { error } = this.context
-        const postInfo = {
-            post: this.state.post,
-            // userid: this.state.userid,
-            // posted: this.state.posted,
-        }
+        // const postInfo = {
+        //     post: this.state.post,
+        //     // userid: this.state.userid,
+        //     // posted: this.state.posted,
+        // }
         return (
             <div className="PostListPage_Container">
                 <Section className="PostListPage_Add_Post">
-                    <form className="PostListPage_Add_Post_Form">
+                    <form className="PostListPage_Add_Post_Form" onSubmit={this.handleSubmit}>
                         <label>What's on your mind?</label>
                         <textarea
                             required
                             id="post"
-                            className="post"
+                            name="post"
                             cols='30'
                             rows='3'
-                            placeholder="Tips and tricks to ace your coding interview..."
-                            onChange={e => { this.setState({ post: e.target.value }) }}
+                        // placeholder="Tips and tricks to ace your coding interview..."
+                        // onChange={e => { this.setState({ post: e.target.value }) }}
                         />
-                        <button
-                            className="Add_Post_button"
-                            type="submit"
-                            onClick={e => {
-                                e.preventDefault();
-                                this.addPost(postInfo);
-                                this.setState({ routeToHome: true });
-                            }}
-                        >Post</button>
+                        <div className="Add_Post_button" >
+                            <button
+                                type="submit"
+                            // onClick={this.handleSubmit}
+                            // onClick={e => {
+                            //     e.preventDefault();
+                            //     this.addPost(postInfo);
+                            //     this.setState({ routeToHome: true });
+                            // }}
+                            >Post</button>
+                        </div>
                     </form>
                 </Section>
                 <Section list className='PostListPage'>
@@ -111,3 +120,9 @@ export default class PostListPage extends Component {
         )
     }
 }
+
+PostListPage.defaultProps = {
+    history: PropTypes.Object
+};
+
+export default PostListPage;

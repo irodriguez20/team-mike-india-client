@@ -2,11 +2,13 @@ import React from "react";
 import { Route } from "react-router-dom";
 import PostPage from '../../routes/PostPage/PostPage';
 import LoginPage from '../../routes/LoginPage/LoginPage';
-import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage';
+// import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage';
 import SignUpPage from '../../routes/SignUpPage/SignUpPage';
 import PostListPage from '../../routes/PostListPage/PostListPage';
 import LandingPage from '../LandingPage/LandingPage';
-import PostListItem from "../PostListItem/PostListItem";
+// import PostListItem from "../PostListItem/PostListItem";
+// import PrivateRoute from '../Utils/PrivateRoute';
+// import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
 
 class MainPage extends React.Component {
     render() {
