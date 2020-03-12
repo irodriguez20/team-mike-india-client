@@ -17,6 +17,8 @@ const NavBarContext = React.createContext({
     userFirstName: "",
     userLastName: "",
     userid: '',
+    users: [],
+    setUsers: () => { },
     postList: [],
     posts: [],
     comments: [],

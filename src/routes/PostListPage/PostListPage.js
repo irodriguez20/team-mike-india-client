@@ -27,7 +27,10 @@ class PostListPage extends Component {
         PostApiService.getPosts()
             .then(this.context.setPostList)
             .catch(this.context.setError)
-
+        PostApiService.getUsers()
+            .then(this.context.setUsers)
+            .catch(this.context.setError)
+        console.log(this.context.users)
     }
 
     renderPosts() {

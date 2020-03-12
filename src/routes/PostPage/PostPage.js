@@ -5,6 +5,7 @@ import StyleIcon from '../../Components/StyleIcon/StyleIcon'
 import CommentForm from '../../Components/CommentForm/CommentForm'
 import './PostPage.css'
 import { format } from 'date-fns'
+import { getUserNameForPost } from '../../services/helperFunctions'
 import Comments from '../../Components/Comments/Comments'
 
 export default class PostPage extends Component {
@@ -18,6 +19,7 @@ export default class PostPage extends Component {
         const id = parseInt(this.props.match.params.postId);
         const post = this.context.posts.find(po => po.id === id);
         const comments = this.context.comments;
+        const { users = [] } = this.context
         console.log(comments)
 
         if (!post) {
@@ -35,7 +37,7 @@ export default class PostPage extends Component {
                         <PostStyle post={post} />
                         {post.userid && <>
                             <Hyph />
-                            <PostAuthor post={post} />
+                            <PostAuthor post={post} users={users} />
                         </>}
                         <Hyph />
                         <PostDate date={post.posted} />
@@ -43,7 +45,7 @@ export default class PostPage extends Component {
                     <PostContent post={post} />
                 </div>
                 <CommentForm postId={post.id} />
-                <Comments postId={post.id} />
+                <Comments postId={post.id} users={users} />
 
             </>)
     }
@@ -67,10 +69,11 @@ function PostDate({ date }) {
     )
 }
 
-function PostAuthor({ post }) {
+function PostAuthor({ post, users }) {
+    let userId = post.userid;
     return (
         <span className='PostPage__author'>
-            {post.userid}
+            {getUserNameForPost(userId, users)}
         </span>
     )
 }

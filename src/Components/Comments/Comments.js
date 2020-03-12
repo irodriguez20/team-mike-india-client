@@ -31,6 +31,7 @@ class Comments extends Component {
     renderComments() {
         const { comments = [] } = this.context
         const postId = parseInt(this.props.postId);
+        const users = this.props.users;
         const commentsForPost = getCommentsForPost(comments, postId);
 
         return (
@@ -40,6 +41,7 @@ class Comments extends Component {
                     <CommentsItem
                         key={comment.id}
                         comment={comment}
+                        users={users}
                     />)}
             </>
         )

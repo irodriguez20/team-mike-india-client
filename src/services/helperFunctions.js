@@ -1,3 +1,4 @@
+import React from 'react';
 export const countCommentsForPost = (comments = [], postId) =>
     comments.filter(comment => comment.postid == postId).length
 
@@ -17,4 +18,20 @@ export const getCommentsForPost = (comments = [], postId) => {
         }
     }
     return result
+}
+
+export const getUserNameForPost = (userId, users = []) => {
+    let result = users;
+
+    if (userId) {
+        result = [];
+        for (let i = 0; i < users.length; ++i) {
+            let user = users[i];
+
+            if (user.id == userId)
+                result.push(user);
+        }
+        console.log(result);
+    }
+    return result.map(user => <>{user.username}</>)
 }

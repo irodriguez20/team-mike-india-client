@@ -28,6 +28,7 @@ class App extends Component {
     userFirstName: "",
     userLastName: "",
     token: tokenService.token,
+    users: [],
     channels: [],
     channelsSearchResults: [],
     sideDrawerOpen: false,
@@ -241,6 +242,10 @@ class App extends Component {
     this.setState({ error: null })
   }
 
+  setUsers = users => {
+    this.setState({ users })
+  }
+
   setPost = post => {
     this.setState({ post })
   }
@@ -297,6 +302,8 @@ class App extends Component {
       error: this.state.error,
       setError: this.setError,
       clearError: this.clearError,
+      users: this.state.users,
+      setUsers: this.setUsers,
       setPostList: this.setPostList,
       post: this.state.post,
       comments: this.state.comments,

@@ -52,6 +52,18 @@ const PostApiService = {
                     : res.json()
             )
     },
+    getUsers() {
+        return fetch(`${config.API_ENDPOINT}/api/users`, {
+            headers: {
+                'authorization': `bearer ${config.TOKEN_KEY}`,
+            },
+        })
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            )
+    },
     // postComment(postId, comment) {
     //     return fetch(`${config.API_ENDPOINT}/comments`, {
     //         method: 'POST',

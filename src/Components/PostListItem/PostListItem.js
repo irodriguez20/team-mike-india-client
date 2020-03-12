@@ -3,14 +3,27 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Hyph } from '../Utils/Utils'
 import StyleIcon from '../StyleIcon/StyleIcon'
-import { countCommentsForPost } from '../../services/helperFunctions';
+// import { countCommentsForPost } from '../../services/helperFunctions';
 import './PostListItem.css'
 import { format } from 'date-fns'
+import PostApiService from '../../services/post-api-service'
+import NavBarContext from '../../contexts/NavBarContext';
+import { getUserNameForPost } from '../../services/helperFunctions'
 
 export default class PostListItem extends Component {
 
+    static contextType = NavBarContext;
+
+    // grabUsers() {
+    //     PostApiService.getUsers()
+    //         .then(this.context.setUsers)
+    //         .catch(this.context.setError)
+    //     console.log(this.context.users)
+    // }
+
     render() {
-        const { post, comments } = this.props
+        const { users = [] } = this.context
+        const { post } = this.props
         return (
             <Link to={`/posts/${post.id}`} className='PostListItem'>
                 <main className='PostListItem__header'>
@@ -23,7 +36,7 @@ export default class PostListItem extends Component {
                         <li><PostStyle post={post} />
                             {post.userid && <>
                                 <Hyph />
-                                <PostAuthor post={post} />
+                                <PostAuthor post={post} users={users} />
                             </>}
                         </li>
                         <li> <span
@@ -32,7 +45,7 @@ export default class PostListItem extends Component {
                             <FontAwesomeIcon size='lg' icon='comment' />
                             <span
                                 className='fa-layers-text fa-inverse'>
-                                {countCommentsForPost(comments, post.id)}
+                                {/* {countCommentsForPost(comments, post.id)} */}
                             </span>
                         </span>
                         </li>
@@ -63,10 +76,11 @@ function PostDate({ post }) {
     )
 }
 
-function PostAuthor({ post }) {
+function PostAuthor({ post, users }) {
+    let userId = post.userid;
     return (
         <span className='PostListItem__author'>
-            {post.userid}
+            {getUserNameForPost(userId, users)}
         </span>
     )
 }

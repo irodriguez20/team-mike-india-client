@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Hyph } from '../Utils/Utils';
 import StyleIcon from '../StyleIcon/StyleIcon';
+import { getUserNameForPost } from '../../services/helperFunctions'
 import './CommentsItem.css';
 
 export default class CommentsItem extends Component {
     render() {
-        const { comment } = this.props
+        const { comment, users } = this.props
         return (
             <Link to={`/comments/${comment.id}`} className='CommentsItem'>
                 <main className='CommentsItem__header'>
@@ -21,7 +22,7 @@ export default class CommentsItem extends Component {
                         <CommentStyle comment={comment} />
                         {comment.userid && <>
                             <Hyph />
-                            <CommentAuthor comment={comment} />
+                            <CommentAuthor comment={comment} users={users} />
                         </>}
                     </section>
                 </main>
@@ -51,10 +52,11 @@ function CommentDate({ comment }) {
     )
 }
 
-function CommentAuthor({ comment }) {
+function CommentAuthor({ comment, users }) {
+    let userId = comment.userid;
     return (
         <span className='CommentItem__author'>
-            {comment.userid}
+            {getUserNameForPost(userId, users)}
         </span>
     )
 }

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Button } from '../Utils/Utils'
 import config from '../../config'
 import './CommentForm.css'
+import { Redirect } from 'react-router-dom';
 // import { tokenService } from '../../services/token-service';
 
 export default class CommentForm extends Component {
@@ -43,7 +44,7 @@ export default class CommentForm extends Component {
             .then(comment => {
                 comment.value = "";
                 this.context.addComment(comment);
-                this.props.push(`posts/${postId}`);
+
             })
             .catch(error => {
                 console.log({ error });
