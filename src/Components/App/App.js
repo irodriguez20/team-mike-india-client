@@ -271,14 +271,6 @@ class App extends Component {
     })
   }
 
-  // handleAddRecipe = recipe => {
-  //   this.setState({
-  //     recipes: [
-  //       ...this.state.recipes,
-  //       recipe
-  //     ]
-  //   })
-  // }
 
   render() {
     let backDrop;

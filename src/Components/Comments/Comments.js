@@ -10,10 +10,7 @@ class Comments extends Component {
     static defaultProps = {
         match: { params: {} },
     }
-    // state = {
-    //     userid: this.context.userid,
-    //     userName: this.context.userName,
-    // }
+
 
     static contextType = NavBarContext;
 
@@ -24,7 +21,6 @@ class Comments extends Component {
             .then(this.context.setComments)
             .catch(this.context.setError)
 
-        console.log(this.context.comments)
 
     }
 

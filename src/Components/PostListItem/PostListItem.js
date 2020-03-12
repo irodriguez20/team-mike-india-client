@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Hyph } from '../Utils/Utils'
 import StyleIcon from '../StyleIcon/StyleIcon'
-// import { countCommentsForPost } from '../../services/helperFunctions';
 import './PostListItem.css'
 import { format } from 'date-fns'
-import PostApiService from '../../services/post-api-service'
 import NavBarContext from '../../contexts/NavBarContext';
 import { getUserNameForPost } from '../../services/helperFunctions'
 
@@ -14,12 +12,7 @@ export default class PostListItem extends Component {
 
     static contextType = NavBarContext;
 
-    // grabUsers() {
-    //     PostApiService.getUsers()
-    //         .then(this.context.setUsers)
-    //         .catch(this.context.setError)
-    //     console.log(this.context.users)
-    // }
+
 
     render() {
         const { users = [] } = this.context
@@ -30,7 +23,7 @@ export default class PostListItem extends Component {
                     <h2 className='PostListItem__heading'>
                         {post.post}
                     </h2>
-                    {/* {post.posted} */}
+
                     <PostDate post={post.posted} />
                     <ul className='PostListItem__footer'>
                         <li><PostStyle post={post} />
@@ -68,7 +61,7 @@ function PostStyle({ post }) {
 }
 
 function PostDate({ post }) {
-    // let date = new Date(post.posted);
+
     return (
         <span className='PostListItem__date'>
             {format(new Date(post), "do MMM YYYY")}
@@ -79,7 +72,7 @@ function PostDate({ post }) {
 function PostAuthor({ post, users }) {
     let userId = post.userid;
     return (
-        <span className='PostListItem__author'>
+        <span className='PostListItem__author' >
             {getUserNameForPost(userId, users)}
         </span>
     )

@@ -31,7 +31,6 @@ export const getUserNameForPost = (userId, users = []) => {
             if (user.id == userId)
                 result.push(user);
         }
-        console.log(result);
     }
-    return result.map(user => <>{user.username}</>)
+    return result.map(user => <span key={userId}>{user.username}</span>)
 }

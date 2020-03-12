@@ -13,12 +13,7 @@ class PostListPage extends Component {
             push: () => { }
         }).isRequired,
     };
-    // state = {
-    //     post: "",
-    //     userid: this.context.userid,
-    //     // posted: new Date(),
-    //     routeToHome: false,
-    // };
+
     static contextType = NavBarContext;
 
 
@@ -30,12 +25,11 @@ class PostListPage extends Component {
         PostApiService.getUsers()
             .then(this.context.setUsers)
             .catch(this.context.setError)
-        console.log(this.context.users)
     }
 
     renderPosts() {
         const { postList = [], comments = [] } = this.context
-        // console.log(this.props)
+
         return postList.map(post =>
             <PostListItem
                 key={post.id}
@@ -82,11 +76,7 @@ class PostListPage extends Component {
 
     render() {
         const { error } = this.context
-        // const postInfo = {
-        //     post: this.state.post,
-        //     // userid: this.state.userid,
-        //     // posted: this.state.posted,
-        // }
+
         return (
             <div className="PostListPage_Container">
                 <Section className="PostListPage_Add_Post">
@@ -98,18 +88,12 @@ class PostListPage extends Component {
                             name="post"
                             cols='30'
                             rows='3'
-                        // placeholder="Tips and tricks to ace your coding interview..."
-                        // onChange={e => { this.setState({ post: e.target.value }) }}
+
                         />
                         <div className="Add_Post_button" >
                             <button
                                 type="submit"
-                            // onClick={this.handleSubmit}
-                            // onClick={e => {
-                            //     e.preventDefault();
-                            //     this.addPost(postInfo);
-                            //     this.setState({ routeToHome: true });
-                            // }}
+
                             >Post</button>
                         </div>
                     </form>

@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import NavBarContext from '../../contexts/NavBarContext'
-// import PostApiService from '../../services/post-api-service'
 import PropTypes from 'prop-types';
 import { Button } from '../Utils/Utils'
 import config from '../../config'
 import './CommentForm.css'
 import { Redirect } from 'react-router-dom';
-// import { tokenService } from '../../services/token-service';
 
 export default class CommentForm extends Component {
     static propTypes = {
@@ -35,7 +33,6 @@ export default class CommentForm extends Component {
             body: JSON.stringify(newComment)
         })
             .then(res => {
-                console.log(newComment);
                 if (!res.ok) {
                     return res.json().then(e => Promise.reject(e));
                 }
@@ -50,42 +47,10 @@ export default class CommentForm extends Component {
                 console.log({ error });
             })
 
-        // PostApiService.postComment(postId, text.value)
-        //     .then(this.context.addComment)
-        //     .then(() => {
-        //         text.value = '',
 
-        // })
-        //     .catch(this.context.setError)
     }
 
-    // addComment = commentInfo => {
-    //     const newComment = {
-    //         comment: commentInfo.comment,
-    //         userid: this.context.userid,
-    //         // posted: postInfo.posted,
-    //     };
 
-    //     fetch(`${config.API_ENDPOINT}/api/comments`, {
-    //         method: "POST",
-    //         headers: new Headers({
-    //             "Content-Type": "application/json",
-    //             "auth": `${config.TOKEN_KEY}`
-    //         }),
-    //         body: JSON.stringify(newComment)
-    //     })
-    //         .then(res => {
-    //             if (!res.ok) {
-    //                 return res.json().then(e => Promise.reject(e));
-    //             }
-    //             this.props.history.push(`posts/${postId}`);
-    //             // this.renderPosts();
-
-    //         })
-    //         .catch(err => {
-    //             console.error({ err });
-    //         });
-    // };
 
     render() {
         return (

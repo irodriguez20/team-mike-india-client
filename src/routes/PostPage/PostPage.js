@@ -20,7 +20,7 @@ export default class PostPage extends Component {
         const post = this.context.posts.find(po => po.id === id);
         const comments = this.context.comments;
         const { users = [] } = this.context
-        console.log(comments)
+
 
         if (!post) {
             return (

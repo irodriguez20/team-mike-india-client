@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Hyph } from '../Utils/Utils';
 import StyleIcon from '../StyleIcon/StyleIcon';
 import { getUserNameForPost } from '../../services/helperFunctions'
@@ -44,7 +43,7 @@ function CommentStyle({ comment }) {
 }
 
 function CommentDate({ comment }) {
-    // let date = new Date(post.posted);
+
     return (
         <span className='CommentItem__date'>
             {format(new Date(comment), "do MMM YYYY")}
