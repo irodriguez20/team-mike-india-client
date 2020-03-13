@@ -3,11 +3,9 @@ import NavBarContext from '../../contexts/NavBarContext';
 import { Redirect } from "react-router-dom";
 
 class LogInForm extends React.Component {
-    // state = {
-    //     email: "",
-    //     password: "",
-    //     routeToHome: false
-    // };
+    state = {
+        routeToHome: false
+    };
 
     handleSubmit = e => {
         e.preventDefault();
@@ -19,6 +17,8 @@ class LogInForm extends React.Component {
         }
 
         this.context.logIn(userInfo);
+        this.setState({ routeToHome: true });
+
     }
 
     static contextType = NavBarContext;
@@ -27,7 +27,7 @@ class LogInForm extends React.Component {
 
         return (
             <main>
-                <Redirect to="/posts" />
+                {this.state.routeToHome && <Redirect to="/posts" />}
                 <header role="banner">
                     <h2>Welcome Back!</h2>
                     <h4>Please log in</h4>

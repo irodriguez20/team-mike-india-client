@@ -12,7 +12,7 @@ export default class LoginPage extends Component {
 
     handleLoginSuccess = () => {
         const { location, history } = this.props
-        const destination = (location.state || {}).from || '/posts'
+        const destination = (location.state || {}).from || '/login'
         history.push(destination)
     }
 

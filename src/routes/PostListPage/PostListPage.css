@@ -5,7 +5,7 @@
   align-items: center;
 }
 
-form {
+form.PostListPage_Add_Post_Form {
   display: flex;
   justify-items: space-between;
   flex-direction: column;
