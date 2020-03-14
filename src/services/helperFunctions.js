@@ -1,6 +1,6 @@
 import React from 'react';
-export const countCommentsForPost = (comments = [], postId) =>
-    comments.filter(comment => comment.postid == postId).length
+// export const countCommentsForPost = (comments = [], postId) =>
+//     comments.filter(comment => comment.postid == postId).length
 
 export const getCommentsForPost = (comments = [], postId) => {
 

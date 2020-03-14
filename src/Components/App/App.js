@@ -81,7 +81,7 @@ class App extends Component {
             userId: res.id,
             userLastName: res.lastName,
             userFirstName: res.firstName,
-            userName: res.username,
+            userName: res.userName,
             token: res.token,
             email: res.email,
           });
@@ -197,8 +197,14 @@ class App extends Component {
       posts: [
         ...this.state.posts,
         post
-      ]
+      ],
+      postList: [
+        ...this.state.postList,
+        post
+      ],
     })
+    this.fetchPosts()
+    this.setPostList(this.state.posts)
   }
 
   fetchComments = () => {
@@ -263,12 +269,14 @@ class App extends Component {
   }
 
   addComment = comment => {
-    this.setComments({
+    this.setState({
       comments: [
         ...this.state.comments,
         comment
       ]
     })
+    this.fetchComments()
+    this.setCommentsList(this.state.comments)
   }
 
 
