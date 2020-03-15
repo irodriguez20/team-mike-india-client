@@ -1,68 +1,35 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# upLift
 
-## Available Scripts
+## Why upLift
 
-In the project directory, you can run:
+> Education is expensive. Mentorship is expensive. However, both should be easily accessible to everyone who desires knowledge and to grow intellectually.
+> At upLift we believe in Denzel Washington's famous quote, 'When you get it, reach back, pull someone else up. Each one, teach one.'
+>
+> upLift is completely free for all users. Share your knowledge with others by becoming a mentor, or gain knowledge
+> from others to help grow in your career or grow your intellectual network.
+> The knowledge you can gain and give is limitless.
 
-### `npm start`
+#### Technology Used
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+> React, JavaScript, CSS, Enzyme, Jest, NPM, RESTFul API, Socket.io
+> [Try out upLift](https://secretstash-app.now.sh/home "Link to upLift homescreen").
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Message Mentors and Mentees
 
-### `npm test`
+> Easily contact your mentors and/or mentees.
+> ![upLift Messages screen](upLiftMessageScreenshot.png "upLift Messages screenshot")
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Add Posts
 
-### `npm run build`
+> Easily add a new post to share any knowledge worth writing an article on for other users.
+> ![upLift Add Post screen](src/SecretStash-Add-Recipe.png "upLift Add Post screenshot")
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### View a specific post, edit and delete posts and add comments.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+> Select a post to view the comments and to add a comment.
+> ![upLift Post screen](src/SecretStash-Recipe.png "upLift Post screenshot")
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<!-- ### Edit Posts
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+> Edit your posts with ease.
+> ![Secret Stash Edit Recipe Screen](src/SecretStash-Edit-Recipe.png "Secret Stash Edit Recipe screenshot") -->
