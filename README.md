@@ -8,7 +8,7 @@
 > upLift is completely free for all users. Share your knowledge with others by becoming a mentor, or gain knowledge
 > from others to help grow in your career or grow your intellectual network.
 > The knowledge you can gain and give is limitless.
-> [!upLift Landing screen](upLift-Landing.png "Link to upLift landing").
+> ![upLift Landing screen](upLift-Landing.png "Link to upLift landing").
 
 #### Technology Used
 
