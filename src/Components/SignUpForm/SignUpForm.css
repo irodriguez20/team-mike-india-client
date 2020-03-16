@@ -17,6 +17,14 @@ main.signUp__signIn {
   margin-right: 40px; */
 }
 
+form.signUp__signIn-form:hover {
+  background: #ffffff;
+}
+
+form.sign-in-container-form:hover {
+  background: #ffffff;
+}
+
 @media only screen and (min-width: 780px) {
   main.signUp__signIn {
     margin: -20px 0px 50px;

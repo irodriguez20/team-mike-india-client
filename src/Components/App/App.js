@@ -223,6 +223,39 @@ class App extends Component {
       });
   };
 
+  handleProfileLink = () => {
+    const loggedInUser = {
+      userName: this.state.userName,
+      userLastName: this.state.userFirstName,
+      userLastName: this.state.userLastName,
+    };
+
+    fetch(`${config.API_ENDPOINT}/api/auth`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(loggedInUser)
+    })
+      .then(res => {
+        return res.json()
+      })
+      .then(res => {
+        this.setState({
+          loggedIn: true,
+          userId: res.id,
+          userLastName: res.lastName,
+          userFirstName: res.firstName
+        });
+        this.fetchPosts()
+        this.fetchComments()
+        this.setUsers(this.state.users)
+      })
+      .catch(error => {
+        console.error({ error });
+      });
+  };
+
   handleSignOut = () => {
     tokenService.remove();
     this.setState({
@@ -297,6 +330,7 @@ class App extends Component {
       userFirstName: this.state.userFirstName,
       userLastName: this.state.userLastName,
       handleSignOut: this.handleSignOut,
+      handleProfileLink: this.handleProfileLink,
       postList: this.state.postList,
       commentsList: this.state.commentsList,
       error: this.state.error,

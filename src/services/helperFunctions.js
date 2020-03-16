@@ -34,3 +34,19 @@ export const getUserNameForPost = (userId, users = []) => {
     }
     return result.map(user => <span key={userId}>{user.username}</span>)
 }
+
+export const getUserPosts = (userid, posts = []) => {
+    let usersPosts = posts;
+
+    if (userid) {
+        usersPosts = [];
+        for (let i = 0; i < posts.length; ++i) {
+            let post = posts[i];
+
+            if (post.userid == userid)
+                usersPosts.push(post);
+        }
+    }
+    return usersPosts;
+
+}

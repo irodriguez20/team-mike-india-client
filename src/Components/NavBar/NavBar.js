@@ -50,7 +50,7 @@ class NavBar extends React.Component {
                                 </>
                             ) : (
                                     <li>
-                                        <Link to="/login">Sign In</Link>
+                                        <Link to="/signup">Sign In</Link>
                                     </li>
                                 )}
                         </ul>

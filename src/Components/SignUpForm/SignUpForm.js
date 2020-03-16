@@ -105,7 +105,7 @@ class SignUpForm extends React.Component {
                         </form>
                     </div>
                     <div className="form-container sign-in-container">
-                        <form action="#">
+                        <form action="#" className="sign-in-container-form">
                             <h1>Sign in</h1>
                             <input
                                 required
