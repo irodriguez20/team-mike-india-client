@@ -100,7 +100,7 @@ form.sign-in-container-form {
   justify-content: center;
   flex-direction: column;
   padding: 0 50px;
-  height: 350px;
+  height: 340px;
   text-align: center;
 }
 
@@ -120,7 +120,8 @@ input {
   overflow: hidden;
   min-width: 350px;
   max-width: 650px;
-  min-height: 675px;
+  min-height: 690px;
+  padding-bottom: 10px;
   display: flex;
   flex-direction: column;
 }
