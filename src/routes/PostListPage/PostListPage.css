@@ -15,13 +15,14 @@ form.PostListPage_Add_Post_Form {
   min-width: 445px;
   border-radius: 8px;
   color: #000638;
-  border-style: solid;
-  border-color: #000638;
+  background-color: rgb(248, 244, 244);
   font-size: 17px;
   font-weight: bold;
   margin-top: 3em;
   margin-left: 15px;
   margin-right: 15px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
 }
 
 textarea {
@@ -30,6 +31,7 @@ textarea {
   min-width: 200px;
   height: 70px;
   border-radius: 5px;
+  border-style: groove;
   font-size: 17px;
   color: #000638;
 }

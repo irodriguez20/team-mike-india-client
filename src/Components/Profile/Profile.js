@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NavBarContext from '../../contexts/NavBarContext';
 import PostListItem from '../../Components/PostListItem/PostListItem';
 import { getUserPosts } from '../../services/helperFunctions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './Profile.css';
 
 export default class UserProfile extends Component {
@@ -18,9 +19,15 @@ export default class UserProfile extends Component {
         const { posts = [], comments = [], userName, userFirstName, userLastName, userid } = this.context;
         return (
             <div className='UserProfile__container'>
+                <div className="upper-container">
+                    <div className="image-container">
+                        <FontAwesomeIcon size='7x' icon='user-circle' />
+                        <span className='fas fa-user-circle'></span>
+                    </div>
+                </div>
                 <section className='UserProfile__names'>
-                    <h1>{userName}</h1>
-                    <h2>{userFirstName} {userLastName}</h2>
+                    <h3>{userFirstName} {userLastName}</h3>
+                    <h4>{userName}</h4>
                     <button onClick={this.handleClickMessage}>Message</button>
                 </section>
                 <section className='List__of__user__activity'>

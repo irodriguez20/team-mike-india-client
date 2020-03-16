@@ -162,7 +162,7 @@ class SignUpForm extends React.Component {
                                     onClick={() => this.handleSignUpToggle()}
                                 >
                                     Sign Up
-                </button>
+                                </button>
                             </div>
                         </div>
                     </div>
