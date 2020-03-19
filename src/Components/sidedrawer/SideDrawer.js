@@ -31,7 +31,7 @@ class SideDrawer extends React.Component {
                   this.context.backDropClickHandler();
                 }}
               >
-                <Link to="/channels">Channels</Link>
+                <Link to="/messages">Messages</Link>
               </li>
 
               <li
