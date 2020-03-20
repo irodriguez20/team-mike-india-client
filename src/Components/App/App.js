@@ -420,7 +420,6 @@ class App extends Component {
           </header>
           <main
             className="App__main"
-            style={{ maxWidth: "1100px", margin: "60px auto 5px auto" }}
           >
             {this.state.hasError === true && (
               <p className="red">There was an error! Please try again.</p>
