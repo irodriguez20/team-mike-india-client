@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // import { Route, Switch } from 'react-router-dom';
-import NavBar from '../NavBar/NavBar';
+import NavBar from "../NavBar/NavBar";
 // import PrivateRoute from '../Utils/PrivateRoute';
 // import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
 // import PostPage from '../../routes/PostPage/PostPage';
@@ -8,15 +8,15 @@ import NavBar from '../NavBar/NavBar';
 // import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage';
 // import SignUpPage from '../../routes/SignUpPage/SignUpPage';
 // import PostListPage from '../../routes/PostListPage/PostListPage';
-import SideDrawer from '../../Components/sidedrawer/SideDrawer';
-import BackDrop from '../../Components/backdrop/BackDrop';
-import NavBarContext, { nullPost } from '../../contexts/NavBarContext';
-import { tokenService } from '../../services/token-service';
-import './App.css';
+import SideDrawer from "../../Components/sidedrawer/SideDrawer";
+import BackDrop from "../../Components/backdrop/BackDrop";
+import NavBarContext, { nullPost } from "../../contexts/NavBarContext";
+import { tokenService } from "../../services/token-service";
+import "./App.css";
 // import LandingPage from '../LandingPage/LandingPage';
-import MainPage from '../MainPage/MainPage'
-import AuthApiService from '../../services/auth-api-service';
-import config from '../../config';
+import MainPage from "../MainPage/MainPage";
+import AuthApiService from "../../services/auth-api-service";
+import config from "../../config";
 
 class App extends Component {
   state = {
@@ -39,14 +39,55 @@ class App extends Component {
     postList: [],
     comments: [],
     commentsList: [],
+    messages: [],
     error: null,
+    allUsers: [],
+    allMessages: []
     // searchLocation: ""
   };
 
   static getDerivedStateFromError(error) {
-    console.error(error)
-    return { hasError: true }
+    console.error(error);
+    return { hasError: true };
   }
+
+  // fetchAllMessages = () => {
+  //   const options = {
+  //     method: "Get",
+  //     headers: new Headers({
+  //       "Content-Type": "application/json"
+  //     })
+  //   };
+
+  //   fetch(`http://localhost:8000/api/messages`, options)
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       console.log(res);
+  //       this.setState({ allMessages: res });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // };
+
+  fetchAllUsers = () => {
+    const options = {
+      method: "Get",
+      headers: new Headers({
+        "Content-Type": "application/json"
+      })
+    };
+    fetch(`${config.API_ENDPOINT}/api/users`, options)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+
+        this.setState({ allUsers: res });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   drawerToggleClickHandler = () => {
     this.setState(prevState => {
@@ -58,17 +99,18 @@ class App extends Component {
     this.setState({ sideDrawerOpen: false });
   };
 
+
   componentDidMount() {
     if (this.state.token !== null && this.state.userName !== null) {
       const loggedInUser = {
-        userName: this.state.userName,
+        userName: this.state.userName
         // token: this.state.token,
       };
 
       fetch(`${config.API_ENDPOINT}/api/auth`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(loggedInUser)
       })
@@ -76,7 +118,7 @@ class App extends Component {
           return res.json();
         })
         .then(res => {
-          console.log(res);
+          // console.log(res);
           this.setState({
             loggedIn: true,
             userId: res.id,
@@ -84,10 +126,12 @@ class App extends Component {
             userFirstName: res.firstName,
             userName: res.userName,
             token: res.token,
-            email: res.email,
+            email: res.email
           });
           this.fetchPosts();
           this.fetchComments();
+          // this.fetchAllMessages();
+          this.fetchAllUsers();
         })
         .catch(err => {
           console.error({ err });
@@ -112,9 +156,9 @@ class App extends Component {
       method: "POST",
       body: JSON.stringify(newUser),
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // "auth": `${config.TOKEN_KEY}`
-      },
+      }
     })
       .then(res => {
         return res.json();
@@ -129,8 +173,8 @@ class App extends Component {
         this.fetchComments();
       })
       .catch(error => {
-        console.error({ error })
-      })
+        console.error({ error });
+      });
   };
 
   logIn = userInfo => {
@@ -148,7 +192,7 @@ class App extends Component {
     fetch(`${config.API_ENDPOINT}/api/auth/login`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // "authorization": `${config.TOKEN_KEY}`
       },
       body: JSON.stringify(userInfo)
@@ -173,8 +217,8 @@ class App extends Component {
         this.fetchComments();
       })
       .catch(error => {
-        console.error({ error })
-      })
+        console.error({ error });
+      });
   };
 
   fetchPosts = () => {
@@ -265,46 +309,46 @@ class App extends Component {
       userLastName: "",
       userFirstName: ""
     });
-    this.fetchPosts()
+    this.fetchPosts();
     this.fetchComments();
   };
 
   setPostList = postList => {
-    this.setState({ postList })
-  }
+    this.setState({ postList });
+  };
 
   setError = error => {
-    console.error(error)
-    this.setState({ error })
-  }
+    console.error(error);
+    this.setState({ error });
+  };
 
   clearError = () => {
-    this.setState({ error: null })
-  }
+    this.setState({ error: null });
+  };
 
   setUsers = users => {
-    this.setState({ users })
-  }
+    this.setState({ users });
+  };
 
   setUserForProfile = user => {
     this.setState({ userForProfile: user })
   }
 
   setPost = post => {
-    this.setState({ post })
-  }
+    this.setState({ post });
+  };
 
   setComments = comments => {
-    this.setState({ comments })
-  }
+    this.setState({ comments });
+  };
   setCommentsList = commentsList => {
-    this.setState({ commentsList })
-  }
+    this.setState({ commentsList });
+  };
 
   clearPost = () => {
-    this.setPost(nullPost)
-    this.setComments([])
-  }
+    this.setPost(nullPost);
+    this.setComments([]);
+  };
 
   addComment = comment => {
     this.setState({
@@ -316,7 +360,6 @@ class App extends Component {
     this.fetchComments()
     this.setCommentsList(this.state.comments)
   }
-
 
   render() {
     let backDrop;
@@ -356,7 +399,9 @@ class App extends Component {
       addPost: this.handleAddPost,
       userid: this.state.userId,
       posts: this.state.posts,
-    }
+      allUsers: this.state.allUsers,
+      allMessages: this.state.allMessages
+    };
     return (
       <div className="App" style={{ height: "100%" }}>
         <NavBarContext.Provider value={value}>
@@ -373,8 +418,13 @@ class App extends Component {
               />
             </section> */}
           </header>
-          <main className="App__main">
-            {this.state.hasError === true && <p className="red">There was an error! Please try again.</p>}
+          <main
+            className="App__main"
+            style={{ maxWidth: "1100px", margin: "60px auto 5px auto" }}
+          >
+            {this.state.hasError === true && (
+              <p className="red">There was an error! Please try again.</p>
+            )}
             <MainPage />
           </main>
         </NavBarContext.Provider>

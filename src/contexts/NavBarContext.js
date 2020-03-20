@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
 
 export const nullPost = {
-    user: {},
-    tags: [],
-}
+  user: {},
+  tags: []
+};
 
 const NavBarContext = React.createContext({
+
     drawerToggleClickHandler: () => { },
     backDropClickHandler: () => { },
     handleSignOut: () => { },
@@ -19,8 +20,6 @@ const NavBarContext = React.createContext({
     userid: '',
     users: [],
     setUsers: () => { },
-    userForProfile: [],
-    setUserForProfile: () => { },
     postList: [],
     posts: [],
     comments: [],
@@ -37,6 +36,9 @@ const NavBarContext = React.createContext({
     setCommentsList: () => { },
     addComment: () => { },
     addPost: () => { },
+    allUsers: [],
+    allMessages: []
 })
+
 
 export default NavBarContext;

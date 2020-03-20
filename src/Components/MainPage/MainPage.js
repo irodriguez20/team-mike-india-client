@@ -7,6 +7,7 @@ import PostListPage from '../../routes/PostListPage/PostListPage';
 import LandingPage from '../LandingPage/LandingPage';
 import UsersListPage from '../../routes/UsersListPage/UsersListPage';
 import UserListMainPage from "../../routes/UserListItemMainPage/UserListItemMainPage";
+import Messages from '../Messages/Messages';
 // import PostListItem from "../PostListItem/PostListItem";
 // import PrivateRoute from '../Utils/PrivateRoute';
 // import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
@@ -21,6 +22,9 @@ class MainPage extends React.Component {
                 <Route exact path="/users/:userId" component={UserListMainPage} />
                 <Route exact path="/signup" component={SignUpPage} />
                 <Route exact path="/posts/:postId" component={PostPage} />
+                <Route exact path="/login" component={LoginPage} />
+                <Route path="/messages" component={Messages} />
+                {/* <Route exact path="/tours/:tourId" component={PostListItem} /> */}
                 {/* <Route exact path="/search/users" component={SearchResultsPage} /> */}
             </main>
         );
