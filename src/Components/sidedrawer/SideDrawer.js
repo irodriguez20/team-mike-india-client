@@ -3,9 +3,15 @@ import { Link } from "react-router-dom";
 import "./SideDrawer.css";
 import NavBarContext from '../../contexts/NavBarContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCommentAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 class SideDrawer extends React.Component {
   static contextType = NavBarContext;
+
+  state = {
+    searchKeyword: ""
+  };
+
 
   render() {
     let drawerClasses = "side-drawer";
@@ -24,6 +30,21 @@ class SideDrawer extends React.Component {
                   this.context.backDropClickHandler();
                 }}
               >
+                <li className="spacer__sideDrawer">
+                  <input
+                    placeholder="search users"
+                    className="search-input"
+                    required
+                    type="text"
+                    name="keyword"
+                    id="search-keyword"
+                    onChange={e => this.setState({ searchKeyword: e.target.value })}
+                  />
+                  <span className="search-icon__sideDrawer">
+                    <FontAwesomeIcon icon={faSearch} />
+                  </span>
+                </li>
+
                 <Link to="/posts">Posts</Link>
               </li>
               <li

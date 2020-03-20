@@ -40,7 +40,27 @@
   font-weight: bold;
 }
 
-@media (min-width: 769px) {
+.spacer__sideDrawer {
+  flex: 1;
+}
+
+.spacer__sideDrawer > input {
+  width: 150px;
+  float: left;
+}
+
+.spacer__sideDrawer > .search-icon__sideDrawer {
+  float: left;
+  padding: 8px;
+  margin: 8px auto;
+}
+
+.spacer__sideDrawer > .search-icon__sideDrawer > svg {
+  height: 20px;
+  width: 20px;
+}
+
+@media (min-width: 908px) {
   .side-drawer {
     display: none;
   }
