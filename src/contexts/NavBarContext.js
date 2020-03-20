@@ -1,40 +1,42 @@
-import React from 'react';
+import React from "react";
 
 export const nullPost = {
-    user: {},
-    tags: [],
-}
+  user: {},
+  tags: []
+};
 
 const NavBarContext = React.createContext({
-    drawerToggleClickHandler: () => { },
-    backDropClickHandler: () => { },
-    handleSignOut: () => { },
-    handleProfileLink: () => { },
-    logIn: () => { },
-    signUp: () => { },
-    userName: "",
-    loggedIn: "",
-    userFirstName: "",
-    userLastName: "",
-    userid: '',
-    users: [],
-    setUsers: () => { },
-    postList: [],
-    posts: [],
-    comments: [],
-    commentsList: [],
-    error: null,
-    setError: () => { },
-    clearError: () => { },
-    setPostList: () => { },
-    post: '',
-    reviews: [],
-    setPost: () => { },
-    clearPost: () => { },
-    setComments: () => { },
-    setCommentsList: () => { },
-    addComment: () => { },
-    addPost: () => { },
-})
+  drawerToggleClickHandler: () => {},
+  backDropClickHandler: () => {},
+  handleSignOut: () => {},
+  handleProfileLink: () => {},
+  logIn: () => {},
+  signUp: () => {},
+  userName: "",
+  loggedIn: "",
+  userFirstName: "",
+  userLastName: "",
+  userid: "",
+  users: [],
+  setUsers: () => {},
+  postList: [],
+  posts: [],
+  comments: [],
+  commentsList: [],
+  error: null,
+  setError: () => {},
+  clearError: () => {},
+  setPostList: () => {},
+  post: "",
+  reviews: [],
+  setPost: () => {},
+  clearPost: () => {},
+  setComments: () => {},
+  setCommentsList: () => {},
+  addComment: () => {},
+  addPost: () => {},
+  allUsers: [],
+  allMessages: []
+});
 
 export default NavBarContext;
