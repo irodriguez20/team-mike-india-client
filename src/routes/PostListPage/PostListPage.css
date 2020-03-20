@@ -11,8 +11,7 @@ form.PostListPage_Add_Post_Form {
   flex-direction: column;
   padding: 15px;
   align-items: center;
-  max-width: 500px;
-  min-width: 445px;
+  max-width: 275px;
   border-radius: 8px;
   color: #000638;
   background-color: rgb(248, 244, 244);
@@ -42,4 +41,11 @@ textarea:hover {
 
 form:hover {
   background: #17cfcf77;
+}
+
+@media screen and (min-width: 575px) {
+  form.PostListPage_Add_Post_Form {
+    max-width: 500px;
+    min-width: 445px;
+  }
 }

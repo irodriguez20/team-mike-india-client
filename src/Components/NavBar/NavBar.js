@@ -4,14 +4,17 @@ import { Link } from "react-router-dom";
 import DrawerToggleButton from "../sidedrawer/DrawerToggleButton";
 import Logo from '../../../src/logo_transparent.png';
 import NavBarContext from '../../contexts/NavBarContext';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 
 class NavBar extends React.Component {
     static contextType = NavBarContext;
 
-    linkToProfile = `/users/${this.context.userName}`;
 
     render() {
+        const { userid } = this.context;
+
         return (
             <header className="toolbar">
                 <nav className="toolbar__navigation">
@@ -32,6 +35,13 @@ class NavBar extends React.Component {
                                     <li>
                                         <Link to="/channels">Channels</Link>
                                     </li>
+                                    <li>
+                                        <Link to="/users">
+                                            <span className='NavBar__users fas fa-users'>
+                                                <FontAwesomeIcon size='2x' icon='users' />
+                                            </span>
+                                        </Link>
+                                    </li>
 
                                     <li
                                         onClick={() => {
@@ -39,7 +49,7 @@ class NavBar extends React.Component {
                                         }}
                                     >
                                         {" "}
-                                        <Link to={this.linkToProfile}>
+                                        <Link to={`/users/${userid}`}>
                                             {this.context.userName || "Profile"}
                                         </Link>
                                     </li>
@@ -59,7 +69,7 @@ class NavBar extends React.Component {
                         <DrawerToggleButton click={this.props.drawerClickHandler} />
                     </div>
                 </nav>
-            </header>
+            </header >
         );
     }
 }

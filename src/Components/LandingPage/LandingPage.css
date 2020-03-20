@@ -29,8 +29,8 @@ button:active {
   transform: scale(0.95);
 }
 
-a:link,
-a:visited {
+.LandingPage a:link,
+.LandingPage a:visited {
   color: white;
   text-align: center;
   text-decoration: none;
