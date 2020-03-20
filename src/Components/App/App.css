@@ -1,7 +1,8 @@
 .App {
   text-align: center;
-}
-
-.App-name-motto {
-  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  margin: 50px;
 }

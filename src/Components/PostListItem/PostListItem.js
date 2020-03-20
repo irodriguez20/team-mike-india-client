@@ -33,13 +33,9 @@ export default class PostListItem extends Component {
                             </>}
                         </li>
                         <li> <span
-                            className='PostListItem__comment-count fa-layers fa-fw'
+                            className='PostListItem__comment-count fa-fw'
                         >
                             <FontAwesomeIcon size='lg' icon='comment' />
-                            <span
-                                className='fa-layers-text fa-inverse'>
-                                {/* {countCommentsForPost(comments, post.id)} */}
-                            </span>
                         </span>
                         </li>
                     </ul>

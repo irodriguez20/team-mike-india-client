@@ -42,9 +42,9 @@ class PostListPage extends Component {
     handleSubmit = e => {
         e.preventDefault();
 
-        const { post } = e.target;
+        const { postText } = e.target;
         const newPost = {
-            post: post.value,
+            post: postText.value,
             userid: this.context.userid,
             // posted: postInfo.posted,
         };
@@ -65,9 +65,9 @@ class PostListPage extends Component {
                 // this.renderPosts();
             })
             .then(post => {
-                post.value = "";
+                postText.value = "";
                 this.context.addPost(post);
-                this.props.history.push('/');
+                this.props.history.push('/posts');
             })
             .catch(err => {
                 console.error({ err });
@@ -84,8 +84,8 @@ class PostListPage extends Component {
                         <label>What's on your mind?</label>
                         <textarea
                             required
-                            id="post"
-                            name="post"
+                            id="postText"
+                            name="postText"
                             cols='30'
                             rows='3'
 

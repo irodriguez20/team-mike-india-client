@@ -17,9 +17,9 @@ export default class CommentForm extends Component {
     handleSubmit = ev => {
         ev.preventDefault()
         const postId = this.props.postId;
-        const { comment } = ev.target;
+        const { commentText } = ev.target;
         const newComment = {
-            comment: comment.value,
+            comment: commentText.value,
             userid: this.context.userid,
             postid: postId,
         }
@@ -39,7 +39,7 @@ export default class CommentForm extends Component {
                 return res.json();
             })
             .then(comment => {
-                comment.value = "";
+                commentText.value = "";
                 this.context.addComment(comment);
 
             })
@@ -62,8 +62,8 @@ export default class CommentForm extends Component {
                     <textarea
                         required
                         aria-label='Type a comment...'
-                        name='comment'
-                        id='comment'
+                        name='commentText'
+                        id='commentText'
                         cols='30'
                         rows='3'
                         placeholder='Type a comment..'>

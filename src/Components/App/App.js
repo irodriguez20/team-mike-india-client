@@ -29,6 +29,7 @@ class App extends Component {
     userLastName: "",
     token: tokenService.token,
     users: [],
+    userForProfile: [],
     channels: [],
     channelsSearchResults: [],
     sideDrawerOpen: false,
@@ -238,9 +239,18 @@ class App extends Component {
 
   handleAddPost = post => {
     this.setState({
-      posts: [...this.state.posts, post]
-    });
-  };
+      posts: [
+        ...this.state.posts,
+        post
+      ],
+      postList: [
+        ...this.state.postList,
+        post
+      ],
+    })
+    this.fetchPosts()
+    this.setPostList(this.state.posts)
+  }
 
   fetchComments = () => {
     fetch(`${config.API_ENDPOINT}/api/comments`, {
@@ -255,6 +265,39 @@ class App extends Component {
       })
       .catch(err => {
         this.setState({ comments: this.props.comments });
+      });
+  };
+
+  handleProfileLink = () => {
+    const loggedInUser = {
+      userName: this.state.userName,
+      userLastName: this.state.userFirstName,
+      userLastName: this.state.userLastName,
+    };
+
+    fetch(`${config.API_ENDPOINT}/api/auth`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(loggedInUser)
+    })
+      .then(res => {
+        return res.json()
+      })
+      .then(res => {
+        this.setState({
+          loggedIn: true,
+          userId: res.id,
+          userLastName: res.lastName,
+          userFirstName: res.firstName
+        });
+        this.fetchPosts()
+        this.fetchComments()
+        this.setUsers(this.state.users)
+      })
+      .catch(error => {
+        console.error({ error });
       });
   };
 
@@ -287,6 +330,10 @@ class App extends Component {
     this.setState({ users });
   };
 
+  setUserForProfile = user => {
+    this.setState({ userForProfile: user })
+  }
+
   setPost = post => {
     this.setState({ post });
   };
@@ -304,10 +351,15 @@ class App extends Component {
   };
 
   addComment = comment => {
-    this.setComments({
-      comments: [...this.state.comments, comment]
-    });
-  };
+    this.setState({
+      comments: [
+        ...this.state.comments,
+        comment
+      ]
+    })
+    this.fetchComments()
+    this.setCommentsList(this.state.comments)
+  }
 
   render() {
     let backDrop;
@@ -326,12 +378,15 @@ class App extends Component {
       userFirstName: this.state.userFirstName,
       userLastName: this.state.userLastName,
       handleSignOut: this.handleSignOut,
+      handleProfileLink: this.handleProfileLink,
       postList: this.state.postList,
       commentsList: this.state.commentsList,
       error: this.state.error,
       setError: this.setError,
       clearError: this.clearError,
       users: this.state.users,
+      userForProfile: this.state.userForProfile,
+      setUserForProfile: this.setUserForProfile,
       setUsers: this.setUsers,
       setPostList: this.setPostList,
       post: this.state.post,
