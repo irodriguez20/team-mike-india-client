@@ -80,8 +80,6 @@ class App extends Component {
     fetch(`${config.API_ENDPOINT}/api/users`, options)
       .then(res => res.json())
       .then(res => {
-        console.log(res);
-
         this.setState({ allUsers: res });
       })
       .catch(err => {

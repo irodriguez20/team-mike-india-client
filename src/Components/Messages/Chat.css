@@ -1,0 +1,95 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.chat-messages-new { 
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.message {
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  width: 70%;
+}
+
+.message > p {
+  display: block;
+}
+
+.message > svg {
+  color: red;
+}
+
+
+p.chat-text-body {
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 0;
+}
+
+p.chat-text-date {
+  width: 40%;
+  background: white;
+  font-size: 0.8rem;
+  margin-top: 0;
+}
+
+
+.your-message {
+  display: flex;
+  align-self: flex-end;
+}
+
+.your-message > svg {
+  align-self: flex-end;
+}
+
+.your-message > p.chat-text-body {
+  display: flex;
+  align-self: flex-end;
+  background: #17cfcf;
+  padding: 16px;
+  border-radius: 14px 14px 0 14px;
+}
+
+.your-message > p.chat-text-date {
+  align-self: flex-end;
+  padding: 4px 0;
+}
+
+.your-message > p {
+  align-self: flex-end;
+}
+
+.other-message {
+  display: flex;
+  align-self: flex-start;
+}
+
+.other-message > p {
+  align-self: flex-start;
+}
+
+.other-message > p.chat-text-body {
+  display: flex;
+  align-self: flex-start;
+  background: #777;
+  padding: 16px;
+    border-radius: 14px 14px 14px 0;
+}
+
+.other-message > p.chat-text-date {
+  color: #777;
+  align-self: flex-start;
+  padding: 4px 0;
+}
+
+.your-message, .other-message {
+flex-direction: column;
+}
