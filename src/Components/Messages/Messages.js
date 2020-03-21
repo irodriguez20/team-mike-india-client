@@ -117,11 +117,12 @@ export default class Messages extends Component {
       messages: this.state.messages,
       loggedInUserID: this.context.userid,
       allUsers: this.context.allUsers,
+      usersInConvos: this.state.usersInConvos,
       handleAddMessage: this.handleAddMessage,
       handleDeleteMessage: this.handleDeleteMessage
     };
 
-    const userConversations = this.state.messages;
+    // const userConversations = this.state.messages;
 
     return (
       <div className="message-body">
