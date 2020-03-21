@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './Components/App/App';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faFrog, faListUl, faListOl, faPenAlt, faGlobeAmericas, faBookOpen, faComment, faQuoteLeft, faUserCircle, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { faFrog, faListUl, faListOl, faPenAlt, faGlobeAmericas, faBookOpen, faComment, faQuoteLeft, faUserCircle, faUsers, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import * as serviceWorker from './serviceWorker';
 
 library.add(
@@ -17,7 +17,8 @@ library.add(
     faComment,
     faQuoteLeft,
     faUserCircle,
-    faUsers
+    faUsers,
+    faPaperPlane
 )
 
 ReactDOM.render(

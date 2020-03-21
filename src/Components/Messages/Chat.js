@@ -37,12 +37,12 @@ class Chat extends React.Component {
               }
             >
               <FontAwesomeIcon icon={faTrashAlt} onClick={event => {
-              event.preventDefault();
-              if (Number(chat.id).length === 0) {
-                Swal.fire("There was an error delering this message");
-              }
-              this.context.handleDeleteMessage(Number(chat.id));
-            }}/>
+                event.preventDefault();
+                if (Number(chat.id).length === 0) {
+                  Swal.fire("There was an error delering this message");
+                }
+                this.context.handleDeleteMessage(Number(chat.id));
+              }} />
 
               <p className="chat-text-body">
                 {chat.message_body}
@@ -83,18 +83,17 @@ class Chat extends React.Component {
                 : null
             }
           />
-          <button
-            onClick={event => {
+          <div className="send-image">
+            <FontAwesomeIcon size='1x' icon='paper-plane' onClick={event => {
               event.preventDefault();
               if (this.state.message_body.length === 0) {
                 Swal.fire("You cannot send an empty message");
               }
               this.context.handleAddMessage(messageBody);
               this.setState({ message_body: "" });
-            }}
-          >
-            Send
-          </button>
+            }} />
+            <span className="fas fa-paper-plane" ></span>
+          </div>
         </div>
       </>
     );
