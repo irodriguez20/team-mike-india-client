@@ -23,7 +23,6 @@ export default class UserListMainPage extends Component {
     render() {
         const { posts = [], comments = [], users = [] } = this.context;
         const { userId } = this.props.match.params
-        console.log(this.props)
 
         const user = findUser(users, userId) || { content: '' }
 

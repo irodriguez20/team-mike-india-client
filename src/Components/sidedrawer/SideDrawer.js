@@ -25,7 +25,7 @@ class SideDrawer extends React.Component {
         <ul>
           {this.context.loggedIn ? (
             <>
-              <li
+              <span
                 onClick={() => {
                   this.context.backDropClickHandler();
                 }}
@@ -46,7 +46,7 @@ class SideDrawer extends React.Component {
                 </li>
 
                 <Link to="/posts">Posts</Link>
-              </li>
+              </span>
               <li
                 onClick={() => {
                   this.context.backDropClickHandler();
