@@ -5,7 +5,8 @@ const MessageContext = React.createContext({
  loggedInUser: "",
  handleAddMessage: () => {},
  handleDeleteMessage: () => {},
- allUsers: []
+ allUsers: [],
+ usersInConvos: []
 });
 
 export default MessageContext;
