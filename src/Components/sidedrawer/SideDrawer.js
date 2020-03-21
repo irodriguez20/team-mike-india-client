@@ -90,7 +90,7 @@ class SideDrawer extends React.Component {
                   this.context.backDropClickHandler();
                 }}
               >
-                <Link to="/login">Log in</Link>
+                <Link to="/signup">Log in</Link>
               </li>
             )}
         </ul>
