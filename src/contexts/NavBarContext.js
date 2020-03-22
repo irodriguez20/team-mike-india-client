@@ -36,6 +36,7 @@ const NavBarContext = React.createContext({
     setCommentsList: () => { },
     addComment: () => { },
     addPost: () => { },
+    handleClickConnect: () => { },
     allUsers: [],
     allMessages: []
 })

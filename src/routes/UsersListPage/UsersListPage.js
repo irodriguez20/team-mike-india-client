@@ -15,7 +15,7 @@ export default class UsersListPage extends Component {
     static contextType = NavBarContext;
 
     render() {
-        const { users = [] } = this.context
+        const users = this.context.allUsers.filter(user => user.id !== this.context.userid)
 
         return (
             <div className='UsersListPage_container'>

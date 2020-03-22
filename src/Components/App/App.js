@@ -17,6 +17,8 @@ import "./App.css";
 import MainPage from "../MainPage/MainPage";
 import AuthApiService from "../../services/auth-api-service";
 import config from "../../config";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 class App extends Component {
   state = {
@@ -42,13 +44,32 @@ class App extends Component {
     messages: [],
     error: null,
     allUsers: [],
-    allMessages: []
+    allMessages: [],
+    allUserFollowers: []
     // searchLocation: ""
   };
 
   static getDerivedStateFromError(error) {
     console.error(error);
     return { hasError: true };
+  }
+
+  fetchAllUserFollowers = () => {
+    const options = {
+          method: "Get",
+          headers: new Headers({
+            "Content-Type": "application/json"
+          })
+        };
+    
+        fetch(`http://localhost:8000/api/userfollowers`, options)
+          .then(res => res.json())
+          .then(res => {
+            this.setState({ allUserFollowers: res });
+          })
+          .catch(err => {
+            console.log(err);
+          });
   }
 
   // fetchAllMessages = () => {
@@ -137,6 +158,7 @@ class App extends Component {
     } else {
       this.fetchPosts();
       this.fetchComments();
+      this.fetchAllUserFollowers();
     }
   }
 
@@ -359,6 +381,37 @@ class App extends Component {
     this.setCommentsList(this.state.comments)
   }
 
+  handleClickConnect = connectionBody => {
+  
+      const newConnection = {
+        userid: connectionBody.userid,
+        followerid: connectionBody.followerid
+      };
+
+      const connectedUser = this.state.allUsers.filter(user => user.id === connectionBody.userid)
+  
+  
+      // Post connection
+      fetch(`${config.API_ENDPOINT}/api/userfollowers`, {
+        method: "POST",
+        headers: new Headers({
+          "Content-Type": "application/json"
+        }),
+        body: JSON.stringify(newConnection)
+      })
+        .then(res => {
+          if (!res.ok) {
+            return res.json().then(e => Promise.reject(e));
+          }
+          Swal.fire(`You've connected with ${connectedUser[0].username}`)
+          this.fetchAllUserFollowers();
+        })
+  
+        .catch(err => {
+          Swal.fire(err.error.message);
+        });
+  }
+
   render() {
     let backDrop;
 
@@ -398,7 +451,8 @@ class App extends Component {
       userid: this.state.userId,
       posts: this.state.posts,
       allUsers: this.state.allUsers,
-      allMessages: this.state.allMessages
+      allMessages: this.state.allMessages,
+      handleClickConnect: this.handleClickConnect
     };
     return (
       <div className="App" style={{ height: "100%" }}>
