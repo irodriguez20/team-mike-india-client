@@ -1,77 +1,99 @@
-import React, { Component } from 'react';
-import NavBarContext from '../../contexts/NavBarContext';
-import PostListItem from '../../Components/PostListItem/PostListItem';
-import { getUserPosts, getUserComments, findUser } from '../../services/helperFunctions';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import './UserListMainPage.css';
-import Comments from '../../Components/Comments/Comments';
+import React, { Component } from "react";
+import NavBarContext from "../../contexts/NavBarContext";
+import PostListItem from "../../Components/PostListItem/PostListItem";
+import { Link } from "react-router-dom";
+
+import {
+  getUserPosts,
+  getUserComments,
+  findUser
+} from "../../services/helperFunctions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./UserListMainPage.css";
+import Comments from "../../Components/Comments/Comments";
 
 export default class UserListMainPage extends Component {
-    static defaultProps = {
-        match: { params: {} }
+  static defaultProps = {
+    match: { params: {} }
+  };
+  static contextType = NavBarContext;
+
+
+  render() {
+    const { posts = [], comments = [], allUsers = [] } = this.context;
+   
+    const connectionBody = {
+        userid: Number(this.props.match.params.userId),
+        followerid: this.context.userid
     }
-    static contextType = NavBarContext;
+    
 
-    handleClickMessage = e => {
-        console.log('clicked message');
-    }
+    const user = this.context.allUsers.filter(
+      user => user.id === Number(this.props.match.params.userId)
+    );
 
-    handleClickConnect = e => {
-        console.log('clicked connect');
-    }
+    const connectAndMessageButtons =
+      Number(this.props.match.params.userId) !== this.context.userid ? (
+        <>
+          {" "}
+          <Link to={`/messages/${user[0].username}`}>
+            <button>Message</button>
+          </Link>
+          <button onClick={(e) => {
+              e.preventDefault()
+              this.context.handleClickConnect(connectionBody)}}>Connect</button>
+        </>
+      ) : null;
 
-    render() {
-        const { posts = [], comments = [], users = [] } = this.context;
-        const { userId } = this.props.match.params
-
-        const user = findUser(users, userId) || { content: '' }
-
-        return (
-            <div className='UserProfile__container'>
-                <div className="upper-container">
-                    <div className="image-container">
-                        <FontAwesomeIcon size='7x' icon='user-circle' />
-                        <span className='fas fa-user-circle'></span>
-                    </div>
-                </div>
-                <section className='UserProfile__names'>
-                    <h3>{user.first_name} {user.last_name}</h3>
-                    <h4>{user.username}</h4>
-                    <button onClick={this.handleClickMessage}>Message</button>
-                    <button onClick={this.handleClickConnect}>Connect</button>
-                </section>
-                <section className='List__of__user__activity'>
-                    <h3>Activity</h3>
-                    <GrabUserPosts posts={posts} comments={comments} userid={user.id} />
-                    <GrabUserComments posts={posts} comments={comments} userid={user.id} />
-                </section>
-            </div>
-        )
-    }
+    return (
+      <div className="UserProfile__container">
+        <div className="upper-container">
+          <div className="image-container">
+            <FontAwesomeIcon size="7x" icon="user-circle" />
+            <span className="fas fa-user-circle"></span>
+          </div>
+        </div>
+        <section className="UserProfile__names">
+          <h3>
+            {user[0].first_name} {user[0].last_name}
+          </h3>
+          <h4>{user[0].username}</h4>
+          {connectAndMessageButtons}
+        </section>
+        <section className="List__of__user__activity">
+          <h3>Activity</h3>
+          <GrabUserPosts posts={posts} comments={comments} userid={user.id} />
+          <GrabUserComments
+            posts={posts}
+            comments={comments}
+            userid={user.id}
+          />
+        </section>
+      </div>
+    );
+  }
 }
 
 function GrabUserPosts({ posts, userid, comments }) {
-    let userPosts = getUserPosts(userid, posts)
-    return userPosts.map(post =>
-        <PostListItem
-            key={post.id}
-            post={post}
-            comments={comments}
-            userid={userid}
-        />
-    )
+  let userPosts = getUserPosts(userid, posts);
+  return userPosts.map(post => (
+    <PostListItem
+      key={post.id}
+      post={post}
+      comments={comments}
+      userid={userid}
+    />
+  ));
 }
 
 function GrabUserComments({ posts, userid, comments }) {
-    let userComments = getUserComments(userid, comments)
-    return userComments.map(comment =>
-        <Comments
-            key={comment.id}
-            post={comment.postid}
-            comment={comment}
-            userid={userid}
-        />
-    )
+  let userComments = getUserComments(userid, comments);
+  return userComments.map(comment => (
+    <Comments
+      key={comment.id}
+      post={comment.postid}
+      comment={comment}
+      userid={userid}
+    />
+  ));
 }
-
-
