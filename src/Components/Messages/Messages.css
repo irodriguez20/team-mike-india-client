@@ -80,13 +80,13 @@
   padding: 10px 10px 20px 15px;
 }
 
-.conversation.active,
-.conversation:hover {
+.conversation.active {
   background: #000638;
 }
 
 .conversation:hover {
   cursor: pointer;
+  background: #000638;
 }
 
 .conversation > svg {
@@ -295,6 +295,11 @@
     padding: 10px;
     font-size: 0.85rem;
   }
+  /*   
+  .conversation.active,
+  .conversation:hover {
+    background: #000638;
+  } */
 
   #chat-title,
   #chat-form {
@@ -391,10 +396,10 @@
     padding: 20px 20px 20px 15px;
   }
 
-  .conversation.active,
+  /* .conversation.active,
   .conversation:hover {
     background: #000638;
-  }
+  } */
 
   .conversation:hover {
     cursor: pointer;

@@ -14,7 +14,7 @@
   padding: 20px;
 }
 
-a:link {
+.UsersListItem:link {
   color: #000638;
 }
 

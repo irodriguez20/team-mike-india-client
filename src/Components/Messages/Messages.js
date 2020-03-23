@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NavBarContext from "../../contexts/NavBarContext";
 import MessageContext from "./MessageContext";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Messages.css";
 import ChatPage from "./ChatPage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -134,12 +134,12 @@ export default class Messages extends Component {
             <ul>
               {this.state.usersInConvos.map((user, index) => (
                 <li key={index}>
-                  <Link to={`/messages/${user.username}`}>
+                  <NavLink to={`/messages/${user.username}`} className="conversation-link" >
                     <div className="conversation">
                       <FontAwesomeIcon icon={faUser} />
                       <div className="title-text">{user.username}</div>
                     </div>
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>

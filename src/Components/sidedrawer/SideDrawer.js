@@ -54,9 +54,14 @@ class SideDrawer extends React.Component {
               >
                 <Link to="/messages">
                   <FontAwesomeIcon icon={faCommentAlt} />
+                  {' '}
                 Messages</Link>
               </li>
-              <li>
+              <li
+                onClick={() => {
+                  this.context.backDropClickHandler();
+                }}
+              >
                 <Link to="/users">
                   <span className='NavBar__users fas fa-users'>
                     <FontAwesomeIcon size='2x' icon='users' />
