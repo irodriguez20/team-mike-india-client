@@ -11,7 +11,7 @@ main.signUp__signIn {
   align-items: center;
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
-  height: 100vh;
+  height: 120vh;
   margin: -20px 0 50px;
 }
 
@@ -99,9 +99,15 @@ form.sign-in-container-form {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 0 50px;
-  height: 340px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 20px;
+  height: 100%;
   text-align: center;
+}
+
+.signUp__signIn-form {
+  padding-bottom: 15px;
 }
 
 input {

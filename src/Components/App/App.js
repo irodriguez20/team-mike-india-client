@@ -56,20 +56,20 @@ class App extends Component {
 
   fetchAllUserFollowers = () => {
     const options = {
-          method: "Get",
-          headers: new Headers({
-            "Content-Type": "application/json"
-          })
-        };
-    
-        fetch(`http://localhost:8000/api/userfollowers`, options)
-          .then(res => res.json())
-          .then(res => {
-            this.setState({ allUserFollowers: res });
-          })
-          .catch(err => {
-            console.log(err);
-          });
+      method: "Get",
+      headers: new Headers({
+        "Content-Type": "application/json"
+      })
+    };
+
+    fetch(`${config.API_ENDPOINT}/api/userfollowers`, options)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ allUserFollowers: res });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   // fetchAllMessages = () => {
@@ -382,34 +382,34 @@ class App extends Component {
   }
 
   handleClickConnect = connectionBody => {
-  
-      const newConnection = {
-        userid: connectionBody.userid,
-        followerid: connectionBody.followerid
-      };
 
-      const connectedUser = this.state.allUsers.filter(user => user.id === connectionBody.userid)
-  
-  
-      // Post connection
-      fetch(`${config.API_ENDPOINT}/api/userfollowers`, {
-        method: "POST",
-        headers: new Headers({
-          "Content-Type": "application/json"
-        }),
-        body: JSON.stringify(newConnection)
+    const newConnection = {
+      userid: connectionBody.userid,
+      followerid: connectionBody.followerid
+    };
+
+    const connectedUser = this.state.allUsers.filter(user => user.id === connectionBody.userid)
+
+
+    // Post connection
+    fetch(`${config.API_ENDPOINT}/api/userfollowers`, {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/json"
+      }),
+      body: JSON.stringify(newConnection)
+    })
+      .then(res => {
+        if (!res.ok) {
+          return res.json().then(e => Promise.reject(e));
+        }
+        Swal.fire(`You've connected with ${connectedUser[0].username}`)
+        this.fetchAllUserFollowers();
       })
-        .then(res => {
-          if (!res.ok) {
-            return res.json().then(e => Promise.reject(e));
-          }
-          Swal.fire(`You've connected with ${connectedUser[0].username}`)
-          this.fetchAllUserFollowers();
-        })
-  
-        .catch(err => {
-          Swal.fire(err.error.message);
-        });
+
+      .catch(err => {
+        Swal.fire(err.error.message);
+      });
   }
 
   render() {

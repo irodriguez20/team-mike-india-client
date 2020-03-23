@@ -1,6 +1,7 @@
 import React from "react";
 import NavBarContext from '../../contexts/NavBarContext';
 import { Redirect } from "react-router-dom";
+import config from "../../config";
 import "./SignUpForm.css";
 
 class SignUpForm extends React.Component {
@@ -25,49 +26,90 @@ class SignUpForm extends React.Component {
         });
     };
 
-    render() {
+    handleSubmitSignIn = e => {
+        e.preventDefault();
+
+        const { email, password } = e.target;
         const userInfo = {
-            username: this.state.username,
-            first_name: this.state.first_name,
-            last_name: this.state.last_name,
-            email: this.state.email,
-            password: this.state.password
-        };
+            email: email.value,
+            password: password.value,
+        }
+
+        this.context.logIn(userInfo);
+    };
+
+    handleSubmitSignUp = e => {
+        e.preventDefault();
+
+        const { username, first_name, last_name, email, password } = e.target;
+        const newUser = {
+            username: username.value,
+            first_name: first_name.value,
+            last_name: last_name.value,
+            email: email.value,
+            password: password.value
+        }
+
+        this.context.signUp(newUser);
+
+        // fetch(`${config.API_ENDPOINT}/api/users`, {
+        //     method: "POST",
+        //     body: JSON.stringify(newUser),
+        //     headers: {
+        //         "content-type": "application/json"
+        //     }
+        // })
+        //     .then(res => {
+        //         if (!res.ok) {
+        //             return res.json().then(e => Promise.reject(e));
+        //         }
+        //         return res.json();
+        //     })
+        //     .then(user => {
+        //         username.value = "";
+        //         first_name.value = "";
+        //         last_name.value = "";
+        //         email.value = "";
+        //         password.value = "";
+        //         this.context.signUp(user)
+        //     })
+        //     .catch(error => {
+        //         console.error({ error });
+        //     });
+    };
+
+
+    render() {
+        // const userInfo = {
+        //     username: this.state.username,
+        //     first_name: this.state.first_name,
+        //     last_name: this.state.last_name,
+        //     email: this.state.email,
+        //     password: this.state.password
+        // };
 
         return (
             <main className="signUp__signIn">
                 {this.context.loggedIn && <Redirect to="/posts" />}
                 <div className={this.state.signUpToggle} id="container">
                     <div className="form-container sign-up-container">
-                        <form action="#" className="signUp__signIn-form">
+                        <form action="#" className="signUp__signIn-form" onSubmit={this.handleSubmitSignUp}>
                             <h1>Create Account</h1>
-                            {/* <div className="social-container">
-                <a href="#" className="social">
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" className="social">
-                  <i className="fab fa-google-plus-g"></i>
-                </a>
-                <a href="#" className="social">
-                  <i className="fab fa-linkedin-in"></i>
-                </a>
-              </div>
-              <span>or use your email for registration</span> */}
                             <input
+                                required
                                 placeholder="First name"
                                 type="text"
-                                required
                                 name="first_name"
                                 id="first_name"
-                                onChange={e => this.setState({ first_name: e.target.value })}
+                            // onChange={e => { e.preventDefault(); this.setState({ first_name: e.target.value }) }}
                             />
                             <input
-                                placeholder="Last name"
                                 required
+                                placeholder="Last name"
                                 type="text"
                                 name="last_name"
                                 id="last_name"
-                                onChange={e => this.setState({ last_name: e.target.value })}
+                            // onChange={e => { e.preventDefault(); this.setState({ last_name: e.target.value }) }}
                             />
                             <input
                                 required
@@ -75,7 +117,7 @@ class SignUpForm extends React.Component {
                                 name="email"
                                 id="email"
                                 placeholder="Email"
-                                onChange={e => this.setState({ email: e.target.value })}
+                            // onChange={e => { e.preventDefault(); this.setState({ email: e.target.value }) }}
                             />
                             <input
                                 required
@@ -83,7 +125,7 @@ class SignUpForm extends React.Component {
                                 name="username"
                                 id="username"
                                 placeholder="username"
-                                onChange={e => this.setState({ username: e.target.value })}
+                            // onChange={e => { e.preventDefault(); this.setState({ username: e.target.value }) }}
                             />
                             <input
                                 required
@@ -91,21 +133,22 @@ class SignUpForm extends React.Component {
                                 placeholder="Password"
                                 name="password"
                                 id="password"
-                                onChange={e => this.setState({ password: e.target.value })}
+                            // onChange={e => { e.preventDefault(); this.setState({ password: e.target.value }) }}
                             />
                             <button
-                                onClick={e => {
-                                    e.preventDefault();
-                                    this.context.signUp(userInfo);
-                                    // this.setState({ routeToHome: this.context.loggedIn });
-                                }}
+                                type='submit'
+                            // onClick={e => {
+                            //     e.preventDefault();
+                            //     this.context.signUp(userInfo);
+                            //     // this.setState({ routeToHome: this.context.loggedIn });
+                            // }}
                             >
                                 Sign Up
               </button>
                         </form>
                     </div>
                     <div className="form-container sign-in-container">
-                        <form action="#" className="sign-in-container-form">
+                        <form action="#" className="sign-in-container-form" onSubmit={this.handleSubmitSignIn}>
                             <h1>Sign in</h1>
                             <input
                                 required
@@ -113,7 +156,7 @@ class SignUpForm extends React.Component {
                                 name="email"
                                 id="user-signin-email"
                                 placeholder="Email"
-                                onChange={e => this.setState({ email: e.target.value })}
+                            // onChange={e => { e.preventDefault(); this.setState({ email: e.target.value }) }}
                             />
                             <input
                                 required
@@ -121,18 +164,19 @@ class SignUpForm extends React.Component {
                                 name="password"
                                 id="user-signin-password"
                                 placeholder="Password"
-                                onChange={e => this.setState({ password: e.target.value })}
+                            // onChange={e => { e.preventDefault(); this.setState({ password: e.target.value }) }}
                             />
                             <button
-                                onClick={e => {
-                                    e.preventDefault();
-                                    const loginInfo = {
-                                        email: this.state.email,
-                                        password: this.state.password
-                                    };
-                                    this.context.logIn(loginInfo);
-                                    // this.setState({ routeToHome: this.context.loggedIn });
-                                }}
+                                type='submit'
+                            // onClick={e => {
+                            //     e.preventDefault();
+                            //     const loginInfo = {
+                            //         email: this.state.email,
+                            //         password: this.state.password
+                            //     };
+                            //     this.context.logIn(loginInfo);
+                            //     // this.setState({ routeToHome: this.context.loggedIn });
+                            // }}
                             >
                                 Sign In
               </button>
