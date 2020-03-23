@@ -14,11 +14,11 @@ export default class UsersListItem extends Component {
   render() {
     const { user } = this.props;
 
-    const connectionBody = {
-        userid: user.id,
-        followerid: this.context.userid
-    }
-    
+    // const connectionBody = {
+    //   userid: user.id,
+    //   followerid: this.context.userid
+    // }
+
 
     return (
       <Link to={`/users/${user.id}`} className="UsersListItem">
@@ -33,11 +33,6 @@ export default class UsersListItem extends Component {
             {user.first_name} {user.last_name}
           </h3>
           <h4>{user.username}</h4>
-          {/* <Link to={`/messages/${user.username}`}>
-            <button>Message</button>
-          </Link> */}
-          {/* <button onClick={this.handleClickMessage}>Message</button> */}
-          {/* <button onClick={this.context.handleClickConnect()}>Connect</button>{" "} */}
           <button>Connect</button>{" "}
         </section>
       </Link>

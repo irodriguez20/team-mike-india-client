@@ -1,7 +1,6 @@
 import React from "react";
 import NavBarContext from '../../contexts/NavBarContext';
 import { Redirect } from "react-router-dom";
-import config from "../../config";
 import "./SignUpForm.css";
 
 class SignUpForm extends React.Component {
@@ -51,42 +50,10 @@ class SignUpForm extends React.Component {
         }
 
         this.context.signUp(newUser);
-
-        // fetch(`${config.API_ENDPOINT}/api/users`, {
-        //     method: "POST",
-        //     body: JSON.stringify(newUser),
-        //     headers: {
-        //         "content-type": "application/json"
-        //     }
-        // })
-        //     .then(res => {
-        //         if (!res.ok) {
-        //             return res.json().then(e => Promise.reject(e));
-        //         }
-        //         return res.json();
-        //     })
-        //     .then(user => {
-        //         username.value = "";
-        //         first_name.value = "";
-        //         last_name.value = "";
-        //         email.value = "";
-        //         password.value = "";
-        //         this.context.signUp(user)
-        //     })
-        //     .catch(error => {
-        //         console.error({ error });
-        //     });
     };
 
 
     render() {
-        // const userInfo = {
-        //     username: this.state.username,
-        //     first_name: this.state.first_name,
-        //     last_name: this.state.last_name,
-        //     email: this.state.email,
-        //     password: this.state.password
-        // };
 
         return (
             <main className="signUp__signIn">
@@ -101,7 +68,7 @@ class SignUpForm extends React.Component {
                                 type="text"
                                 name="first_name"
                                 id="first_name"
-                            // onChange={e => { e.preventDefault(); this.setState({ first_name: e.target.value }) }}
+
                             />
                             <input
                                 required
@@ -109,7 +76,7 @@ class SignUpForm extends React.Component {
                                 type="text"
                                 name="last_name"
                                 id="last_name"
-                            // onChange={e => { e.preventDefault(); this.setState({ last_name: e.target.value }) }}
+
                             />
                             <input
                                 required
@@ -117,7 +84,7 @@ class SignUpForm extends React.Component {
                                 name="email"
                                 id="email"
                                 placeholder="Email"
-                            // onChange={e => { e.preventDefault(); this.setState({ email: e.target.value }) }}
+
                             />
                             <input
                                 required
@@ -125,7 +92,6 @@ class SignUpForm extends React.Component {
                                 name="username"
                                 id="username"
                                 placeholder="username"
-                            // onChange={e => { e.preventDefault(); this.setState({ username: e.target.value }) }}
                             />
                             <input
                                 required
@@ -133,15 +99,9 @@ class SignUpForm extends React.Component {
                                 placeholder="Password"
                                 name="password"
                                 id="password"
-                            // onChange={e => { e.preventDefault(); this.setState({ password: e.target.value }) }}
                             />
                             <button
                                 type='submit'
-                            // onClick={e => {
-                            //     e.preventDefault();
-                            //     this.context.signUp(userInfo);
-                            //     // this.setState({ routeToHome: this.context.loggedIn });
-                            // }}
                             >
                                 Sign Up
               </button>

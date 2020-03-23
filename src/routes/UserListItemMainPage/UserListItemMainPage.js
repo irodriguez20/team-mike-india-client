@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import {
   getUserPosts,
   getUserComments,
-  findUser
 } from "../../services/helperFunctions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./UserListMainPage.css";
@@ -21,27 +20,28 @@ export default class UserListMainPage extends Component {
 
   render() {
     const { posts = [], comments = [], allUsers = [] } = this.context;
-   
-    const connectionBody = {
-        userid: Number(this.props.match.params.userId),
-        followerid: this.context.userid
-    }
-    
 
-    const user = this.context.allUsers.filter(
-      user => user.id === Number(this.props.match.params.userId)
+    const connectionBody = {
+      userid: Number(this.props.match.params.userId),
+      followerid: this.context.userid
+    }
+
+
+    const user = allUsers.filter(
+      user => user.id === parseInt(this.props.match.params.userId)
     );
 
     const connectAndMessageButtons =
-      Number(this.props.match.params.userId) !== this.context.userid ? (
+      parseInt(this.props.match.params.userId) !== this.context.userid ? (
         <>
           {" "}
           <Link to={`/messages/${user[0].username}`}>
             <button>Message</button>
           </Link>
           <button onClick={(e) => {
-              e.preventDefault()
-              this.context.handleClickConnect(connectionBody)}}>Connect</button>
+            e.preventDefault()
+            this.context.handleClickConnect(connectionBody)
+          }}>Connect</button>
         </>
       ) : null;
 
@@ -62,11 +62,11 @@ export default class UserListMainPage extends Component {
         </section>
         <section className="List__of__user__activity">
           <h3>Activity</h3>
-          <GrabUserPosts posts={posts} comments={comments} userid={user.id} />
+          <GrabUserPosts posts={posts} comments={comments} userid={user[0].id} />
           <GrabUserComments
             posts={posts}
             comments={comments}
-            userid={user.id}
+            userid={user[0].id}
           />
         </section>
       </div>

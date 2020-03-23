@@ -52,7 +52,9 @@ class SideDrawer extends React.Component {
                   this.context.backDropClickHandler();
                 }}
               >
-                <Link to="/messages">Messages</Link>
+                <Link to="/messages">
+                  <FontAwesomeIcon icon={faCommentAlt} />
+                Messages</Link>
               </li>
               <li>
                 <Link to="/users">

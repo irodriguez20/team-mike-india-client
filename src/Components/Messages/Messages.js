@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "./Messages.css";
 import ChatPage from "./ChatPage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { format } from "date-fns";
+// import { format } from "date-fns";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import config from "../../config";
@@ -20,7 +20,7 @@ export default class Messages extends Component {
     userConversations: [],
     loggedInUserID: this.context.userid,
     usersInConvos: []
-    };
+  };
 
   static contextType = NavBarContext;
 
@@ -48,7 +48,7 @@ export default class Messages extends Component {
           user.id !== this.context.userid
         );
 
-        this.setState({ messages: userConversations, usersInConvos:  setAllUsers });
+        this.setState({ messages: userConversations, usersInConvos: setAllUsers });
       })
       .catch(err => {
         Swal.fire(err);
@@ -89,28 +89,28 @@ export default class Messages extends Component {
   };
 
   handleDeleteMessage = messageID => {
-      const options = {
-        method: "Delete",
-        headers: new Headers({
-          "Content-Type": "application/json"
-        })
-      };
-  
-      fetch(
-        `${config.API_ENDPOINT}/api/messages/${messageID}`,
-        options
-      )
-        .then(res => {
+    const options = {
+      method: "Delete",
+      headers: new Headers({
+        "Content-Type": "application/json"
+      })
+    };
+
+    fetch(
+      `${config.API_ENDPOINT}/api/messages/${messageID}`,
+      options
+    )
+      .then(res => {
         if (!res.ok) {
           return res.json().then(e => Promise.reject(e));
         }
 
-          this.setState({ messages: this.state.messages.filter(n => n.id !== messageID) });
-        })
-        .catch(err => {
-          Swal.fire(err.error.message);
-        });
-    };
+        this.setState({ messages: this.state.messages.filter(n => n.id !== messageID) });
+      })
+      .catch(err => {
+        Swal.fire(err.error.message);
+      });
+  };
 
   render() {
     const value = {

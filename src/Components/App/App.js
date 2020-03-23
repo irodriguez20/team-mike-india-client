@@ -1,19 +1,10 @@
 import React, { Component } from "react";
-// import { Route, Switch } from 'react-router-dom';
 import NavBar from "../NavBar/NavBar";
-// import PrivateRoute from '../Utils/PrivateRoute';
-// import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
-// import PostPage from '../../routes/PostPage/PostPage';
-// import LoginPage from '../../routes/LoginPage/LoginPage';
-// import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage';
-// import SignUpPage from '../../routes/SignUpPage/SignUpPage';
-// import PostListPage from '../../routes/PostListPage/PostListPage';
 import SideDrawer from "../../Components/sidedrawer/SideDrawer";
 import BackDrop from "../../Components/backdrop/BackDrop";
 import NavBarContext, { nullPost } from "../../contexts/NavBarContext";
 import { tokenService } from "../../services/token-service";
 import "./App.css";
-// import LandingPage from '../LandingPage/LandingPage';
 import MainPage from "../MainPage/MainPage";
 import AuthApiService from "../../services/auth-api-service";
 import config from "../../config";
@@ -177,7 +168,6 @@ class App extends Component {
       body: JSON.stringify(newUser),
       headers: {
         "Content-Type": "application/json"
-        // "auth": `${config.TOKEN_KEY}`
       }
     })
       .then(res => {
@@ -198,13 +188,8 @@ class App extends Component {
   };
 
   logIn = userInfo => {
-    // const user = {
-    //   email: userInfo.email,
-    //   password: userInfo.password
-    // };
 
     this.setState({
-      // userId: user.id,
       email: userInfo.email,
       loggedIn: true
     });
@@ -213,7 +198,6 @@ class App extends Component {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
-        // "authorization": `${config.TOKEN_KEY}`
       },
       body: JSON.stringify(userInfo)
     })
@@ -235,6 +219,7 @@ class App extends Component {
         });
         this.fetchPosts();
         this.fetchComments();
+        this.fetchAllUsers();
       })
       .catch(error => {
         console.error({ error });
@@ -291,7 +276,7 @@ class App extends Component {
   handleProfileLink = () => {
     const loggedInUser = {
       userName: this.state.userName,
-      userLastName: this.state.userFirstName,
+      userFirstName: this.state.userFirstName,
       userLastName: this.state.userLastName,
     };
 
@@ -461,14 +446,6 @@ class App extends Component {
             <NavBar drawerClickHandler={this.drawerToggleClickHandler} />
             <SideDrawer show={this.state.sideDrawerOpen} />
             {backDrop}
-            {/* 
-            <section className="App-name-motto">
-              <Route
-                // exact
-                path={'/landing'}
-                component={LandingPage}
-              />
-            </section> */}
           </header>
           <main
             className="App__main"

@@ -73,7 +73,7 @@ export const findUser = (users = [], userid) => {
 
     if (userid) {
         result = []
-        // eslint-disable-next-line
+        //eslint - disable - next - line
         for (var i = 0; i < users.length; ++i) {
             // eslint-disable-next-line
             let user = users[i]

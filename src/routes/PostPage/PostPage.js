@@ -13,12 +13,11 @@ export default class PostPage extends Component {
         match: { params: {} },
     }
 
-    static contextType = NavBarContext
+    static contextType = NavBarContext;
 
     render() {
         const id = parseInt(this.props.match.params.postId);
         const post = this.context.posts.find(po => po.id === id);
-        const comments = this.context.comments;
         const { users = [] } = this.context
 
 

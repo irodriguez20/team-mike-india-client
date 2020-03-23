@@ -1,17 +1,12 @@
 import React, { Component } from 'react'
 import NavBarContext from '../../contexts/NavBarContext'
-import PropTypes from 'prop-types';
 import { Button } from '../Utils/Utils'
 import config from '../../config'
 import './CommentForm.css'
-import { Redirect } from 'react-router-dom';
+
 
 export default class CommentForm extends Component {
-    static propTypes = {
-        history: PropTypes.shape({
-            push: () => { }
-        }).isRequired,
-    };
+
     static contextType = NavBarContext
 
     handleSubmit = ev => {

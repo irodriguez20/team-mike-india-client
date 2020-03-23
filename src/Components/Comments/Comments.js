@@ -3,7 +3,6 @@ import NavBarContext from '../../contexts/NavBarContext';
 import { Section } from '../Utils/Utils';
 import CommentsItem from '../../Components/CommentsItem/CommentsItem';
 import PostApiService from '../../services/post-api-service';
-import PropTypes from 'prop-types';
 import { getCommentsForPost } from '../../services/helperFunctions';
 
 class Comments extends Component {
