@@ -52,7 +52,7 @@ function FindUserInfo({ userid, users }) {
     return (
         <div>
             {result.map(connection =>
-                <section className="UserProfile__names">
+                <section className="UserProfile__names" key={connection.id}>
                     <h3>
                         {connection.first_name} {connection.last_name}
                     </h3>
