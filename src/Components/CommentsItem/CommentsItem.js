@@ -46,7 +46,7 @@ function CommentDate({ comment }) {
 
     return (
         <span className='CommentItem__date'>
-            {format(new Date(comment), "do MMM YYYY")}
+            {format(new Date(comment), "DD MMM YYYY")}
         </span>
     )
 }

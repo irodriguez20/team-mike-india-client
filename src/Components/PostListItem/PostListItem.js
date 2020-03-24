@@ -60,7 +60,7 @@ function PostDate({ post }) {
 
     return (
         <span className='PostListItem__date'>
-            {format(new Date(post), "do MMM YYYY")}
+            {format(new Date(post), "DD MMM YYYY")}
         </span>
     )
 }

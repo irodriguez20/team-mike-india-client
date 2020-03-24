@@ -63,7 +63,7 @@ function PostStyle({ post }) {
 function PostDate({ date }) {
     return (
         <span className='PostPage__date'>
-            {format(new Date(date), "do MMM YYYY")}
+            {format(new Date(date), "DD MMM YYYY")}
         </span>
     )
 }

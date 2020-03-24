@@ -3,7 +3,7 @@ import { format } from 'date-fns'
 import './Utils.css'
 
 export function NiceDate({ date }) {
-    return format(new Date(date), 'do MMMM YYYY')
+    return format(new Date(date), 'DD MMMM YYYY')
 }
 
 export function Hyph() {
@@ -30,7 +30,7 @@ export function Required({ className, ...props }) {
     return (
         <span className={['Required', className].join(' ')} {...props}>
             &#42;
-    </span>
+        </span>
     )
 }
 

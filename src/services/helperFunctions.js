@@ -85,3 +85,27 @@ export const findUser = (users = [], userid) => {
 
     return result[0]
 }
+
+export const findUserConnectionInfo = (user, users = []) => {
+    let result = users;
+
+    if (user) {
+        result = [];
+        for (let i = 0; i < users.length; ++i) {
+            let user = users[i];
+            console.log(user)
+            if (user.id == user.followerid)
+                result.push(user);
+        }
+    }
+    return (result.map(user =>
+        <section className="UserProfile__names">
+            <h3>
+                {user.first_name} {user.last_name}
+            </h3>
+            <h4>{user.username}</h4>
+            <button>Message</button>{" "}
+        </section>
+    )
+    )
+}

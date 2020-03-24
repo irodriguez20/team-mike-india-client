@@ -56,7 +56,14 @@ class App extends Component {
     fetch(`${config.API_ENDPOINT}/api/userfollowers`, options)
       .then(res => res.json())
       .then(res => {
-        this.setState({ allUserFollowers: res });
+        // const userConnection = {
+        //   connectionid: res.connectionid,
+        //   userid: res.userid,
+        //   followerid: res.followerid
+        // }
+        this.setState({
+          allUserFollowers: res
+        });
       })
       .catch(err => {
         console.log(err);
@@ -142,6 +149,7 @@ class App extends Component {
           this.fetchComments();
           // this.fetchAllMessages();
           this.fetchAllUsers();
+          this.fetchAllUserFollowers();
         })
         .catch(err => {
           console.error({ err });
@@ -149,7 +157,6 @@ class App extends Component {
     } else {
       this.fetchPosts();
       this.fetchComments();
-      this.fetchAllUserFollowers();
     }
   }
 
@@ -181,6 +188,7 @@ class App extends Component {
         this.logIn(user);
         this.fetchPosts();
         this.fetchComments();
+        this.fetchAllUserFollowers();
       })
       .catch(error => {
         console.error({ error });
@@ -220,6 +228,7 @@ class App extends Component {
         this.fetchPosts();
         this.fetchComments();
         this.fetchAllUsers();
+        this.fetchAllUserFollowers();
       })
       .catch(error => {
         console.error({ error });
@@ -300,6 +309,7 @@ class App extends Component {
         this.fetchPosts()
         this.fetchComments()
         this.setUsers(this.state.users)
+        this.fetchAllUserFollowers();
       })
       .catch(error => {
         console.error({ error });
@@ -437,7 +447,8 @@ class App extends Component {
       posts: this.state.posts,
       allUsers: this.state.allUsers,
       allMessages: this.state.allMessages,
-      handleClickConnect: this.handleClickConnect
+      handleClickConnect: this.handleClickConnect,
+      allUserFollowers: this.state.allUserFollowers,
     };
     return (
       <div className="App" style={{ height: "100%" }}>

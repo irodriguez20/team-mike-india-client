@@ -49,7 +49,7 @@ class Chat extends React.Component {
                 <span></span>
               </p>
               <p className="chat-text-date">
-                {format(new Date(chat.created_at), "DD-MM h:ma")}
+                {format(new Date(chat.created_at), "DD-MM h:mm")}
               </p>
             </div>
           </div>

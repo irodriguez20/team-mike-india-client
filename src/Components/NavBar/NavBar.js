@@ -61,7 +61,9 @@ class NavBar extends React.Component {
                                             </span>
                                         </Link>
                                     </li>
-
+                                    <li>
+                                        <Link to="/connections">Connections</Link>
+                                    </li>
                                     <li
                                         onClick={() => {
                                             this.context.handleProfileLink();
