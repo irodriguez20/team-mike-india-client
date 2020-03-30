@@ -24,7 +24,7 @@ class LandingPage extends Component {
                         knowledge you can gain and give is limitless.
                     </section>
                     <button className="signUp_landing">
-                        <Link to="/signup">Lets Grow</Link>
+                        <Link to="/signup">Let's Grow</Link>
                     </button>
                 </main>
             </div>

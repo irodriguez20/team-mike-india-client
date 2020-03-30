@@ -195,10 +195,7 @@ class App extends Component {
   };
 
   logIn = userInfo => {
-    this.setState({
-      email: userInfo.email,
-      loggedIn: true
-    });
+
     AuthApiService.postLogin(userInfo);
     fetch(`${config.API_ENDPOINT}/api/auth/login`, {
       method: "POST",
@@ -229,7 +226,8 @@ class App extends Component {
         this.fetchAllUserFollowers();
       })
       .catch(error => {
-        console.error({ error });
+        // console.error({ error });
+        Swal.fire(`Username or password incorrect. Please try again or sign up: ${error.error.message}`);
       });
   };
 
