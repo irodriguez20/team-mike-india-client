@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import config from "../../config";
-import { faCommentAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
+
 
 import {
   faUser

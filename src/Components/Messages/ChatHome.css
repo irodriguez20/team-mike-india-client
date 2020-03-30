@@ -1,0 +1,12 @@
+.chatHome {
+  margin: 20px;
+}
+
+.chatHome section {
+  padding: 5px;
+}
+
+.chatHome > svg {
+  margin-top: 50px;
+  padding: 10px;
+}

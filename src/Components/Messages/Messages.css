@@ -17,7 +17,8 @@
   min-height: 500px;
   width: 100%;
   /* height: 95vh; */
-  background: #fff;
+  background: #ddd;
+  color: #17cfcf;
   border-radius: 10px;
   margin-top: 30px;
 }
@@ -338,7 +339,7 @@
     max-height: 800px;
     width: 100%;
     height: 95vh;
-    background: #fff;
+    background: #ddd;
     border-radius: 10px;
   }
 
