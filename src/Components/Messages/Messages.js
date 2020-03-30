@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NavBarContext from "../../contexts/NavBarContext";
 import MessageContext from "./MessageContext";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "./Messages.css";
 import ChatPage from "./ChatPage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import config from "../../config";
+import { faCommentAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 import {
   faUser
@@ -18,6 +19,7 @@ export default class Messages extends Component {
   state = {
     messages: [],
     userConversations: [],
+    filtered: [],
     loggedInUserID: this.context.userid,
     usersInConvos: []
   };
@@ -112,6 +114,37 @@ export default class Messages extends Component {
       });
   };
 
+  handleChange = e => {
+    // e.preventDefault();
+    // Variable to hold the original version of the list
+    let currentList = [];
+    // Variable to hold the filtered list before putting into state
+    let newList = [];
+
+    // If the search bar isn't empty
+    if (e.target.value !== "") {
+      // Assign the original list to currentList
+      currentList = this.state.usersInConvos;
+      // Use .filter() to determine which items should be displayed
+      // based on the search terms
+      newList = currentList.filter(user => {
+        // change current item to lowercase
+        const lc = user.username.toLowerCase();
+        // change search term to lowercase
+        const filter = e.target.value.toLowerCase();
+        // check to see if the current list item includes the search term
+        // If it does, it will be added to newList. Using lowercase eliminates
+        // issues with capitalization in search terms and search content
+        return lc.includes(filter);
+      });
+    } else {
+      // If the search bar is empty, set newList to original task list
+      newList = this.state.usersInConvos;
+    }
+    // Set the filtered state based on what our rules added to newList
+    this.setState({ usersInConvos: newList })
+  }
+
   render() {
     const value = {
       messages: this.state.messages,
@@ -127,8 +160,15 @@ export default class Messages extends Component {
     return (
       <div className="message-body">
         <div className="message-container">
-          <div id="search-container">
-            <input type="text" placeholder="Search" />
+          <div id="search-container" onChange={this.handleChange}>
+            <input
+              placeholder="search users"
+              className="search-input"
+              required
+              type="text"
+              name="keyword"
+              id="search-keyword"
+            />
           </div>
           <div id="conversation-list">
             <ul>
