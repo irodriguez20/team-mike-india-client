@@ -55,14 +55,11 @@ class NavBar extends React.Component {
                                         <Link to="/posts">Posts</Link>
                                     </li>
                                     <li>
-                                        <Link to="/users">
+                                        <Link to="/connections">
                                             <span className='NavBar__users fas fa-users'>
                                                 <FontAwesomeIcon size='2x' icon='users' />
                                             </span>
                                         </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/connections">Connections</Link>
                                     </li>
                                     <li
                                         onClick={() => {
