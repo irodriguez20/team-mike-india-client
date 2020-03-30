@@ -21,7 +21,8 @@ export default class ConnectionsListPage extends Component {
 
     render() {
         const users = this.context.allUserFollowers.filter(user => user.followerid !== this.context.userid)
-        console.log(this.context.allUserFollowers)
+        // console.log(this.context.allUserFollowers)
+        // console.log("users:", users)
 
         return (
             <div className='UsersListPage_container'>

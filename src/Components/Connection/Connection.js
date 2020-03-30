@@ -47,7 +47,6 @@ function FindUserInfo({ userid, users }) {
             if (connection.id == userid)
                 result.push(connection);
         }
-        console.log(users)
     }
     return (
         <div>
