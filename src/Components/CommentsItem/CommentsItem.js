@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { format } from 'date-fns';
-import { Link } from 'react-router-dom';
 import { Hyph } from '../Utils/Utils';
 import StyleIcon from '../StyleIcon/StyleIcon';
 import { getUserNameForPost } from '../../services/helperFunctions'
@@ -10,7 +9,7 @@ export default class CommentsItem extends Component {
     render() {
         const { comment, users } = this.props
         return (
-            <Link to={`/comments/${comment.id}`} className='CommentsItem'>
+            <div className='CommentsItem'>
                 <main className='CommentsItem__header'>
                     <p className='CommentsItem__heading'>
                         {comment.comment}
@@ -26,7 +25,7 @@ export default class CommentsItem extends Component {
                     </section>
                 </main>
 
-            </Link>
+            </div>
         )
     }
 }
