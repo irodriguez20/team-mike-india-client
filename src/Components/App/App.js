@@ -68,7 +68,7 @@ class App extends Component {
       .catch(err => {
         console.log(err);
       });
-  }
+  };
 
   // fetchAllMessages = () => {
   //   const options = {
@@ -115,7 +115,6 @@ class App extends Component {
   backDropClickHandler = () => {
     this.setState({ sideDrawerOpen: false });
   };
-
 
   componentDidMount() {
     if (this.state.token !== null && this.state.userName !== null) {
@@ -250,18 +249,12 @@ class App extends Component {
 
   handleAddPost = post => {
     this.setState({
-      posts: [
-        ...this.state.posts,
-        post
-      ],
-      postList: [
-        ...this.state.postList,
-        post
-      ],
-    })
-    this.fetchPosts()
-    this.setPostList(this.state.posts)
-  }
+      posts: [...this.state.posts, post],
+      postList: [...this.state.postList, post]
+    });
+    this.fetchPosts();
+    this.setPostList(this.state.posts);
+  };
 
   fetchComments = () => {
     fetch(`${config.API_ENDPOINT}/api/comments`, {
@@ -283,7 +276,7 @@ class App extends Component {
     const loggedInUser = {
       userName: this.state.userName,
       userFirstName: this.state.userFirstName,
-      userLastName: this.state.userLastName,
+      userLastName: this.state.userLastName
     };
 
     fetch(`${config.API_ENDPOINT}/api/auth`, {
@@ -294,7 +287,7 @@ class App extends Component {
       body: JSON.stringify(loggedInUser)
     })
       .then(res => {
-        return res.json()
+        return res.json();
       })
       .then(res => {
         this.setState({
@@ -303,9 +296,9 @@ class App extends Component {
           userLastName: res.lastName,
           userFirstName: res.firstName
         });
-        this.fetchPosts()
-        this.fetchComments()
-        this.setUsers(this.state.users)
+        this.fetchPosts();
+        this.fetchComments();
+        this.setUsers(this.state.users);
         this.fetchAllUserFollowers();
       })
       .catch(error => {
@@ -343,8 +336,8 @@ class App extends Component {
   };
 
   setUserForProfile = user => {
-    this.setState({ userForProfile: user })
-  }
+    this.setState({ userForProfile: user });
+  };
 
   setPost = post => {
     this.setState({ post });
@@ -364,25 +357,30 @@ class App extends Component {
 
   addComment = comment => {
     this.setState({
-      comments: [
-        ...this.state.comments,
-        comment
-      ]
-    })
-    this.fetchComments()
-    this.setCommentsList(this.state.comments)
-  }
+      comments: [...this.state.comments, comment]
+    });
+    this.fetchComments();
+    this.setCommentsList(this.state.comments);
+  };
 
   handleClickConnect = connectionBody => {
+    const customId =
+      connectionBody.userid.toString() +
+      connectionBody.followerid.toString() +
+      "0" +
+      connectionBody.followerid.toString() +
+      connectionBody.userid.toString() +
+      "00";
 
     const newConnection = {
       userid: connectionBody.userid,
-      followerid: connectionBody.followerid
+      followerid: connectionBody.followerid,
+      customid: customId
     };
 
-    const connectedUser = this.state.allUsers.filter(user => user.id === connectionBody.userid)
-
-
+    const connectedUser = this.state.allUsers.filter(
+      user => user.id === connectionBody.userid
+    );
     // Post connection
     fetch(`${config.API_ENDPOINT}/api/userfollowers`, {
       method: "POST",
@@ -395,14 +393,17 @@ class App extends Component {
         if (!res.ok) {
           return res.json().then(e => Promise.reject(e));
         }
-        Swal.fire(`You've connected with ${connectedUser[0].username}`)
+        Swal.fire(`You've connected with ${connectedUser[0].username}`);
         this.fetchAllUserFollowers();
       })
 
       .catch(err => {
-        Swal.fire(err.error.message);
+        // Swal.fire(err);
+        Swal.fire(
+          `Sorry! Something went wrong or you are already connected to this user.`
+        );
       });
-  }
+  };
 
   render() {
     let backDrop;
@@ -445,7 +446,7 @@ class App extends Component {
       allUsers: this.state.allUsers,
       allMessages: this.state.allMessages,
       handleClickConnect: this.handleClickConnect,
-      allUserFollowers: this.state.allUserFollowers,
+      allUserFollowers: this.state.allUserFollowers
     };
     return (
       <div className="App" style={{ height: "100%" }}>
@@ -455,9 +456,7 @@ class App extends Component {
             <SideDrawer show={this.state.sideDrawerOpen} />
             {backDrop}
           </header>
-          <main
-            className="App__main"
-          >
+          <main className="App__main">
             {this.state.hasError === true && (
               <p className="red">There was an error! Please try again.</p>
             )}
