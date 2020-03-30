@@ -36,8 +36,8 @@ class App extends Component {
     error: null,
     allUsers: [],
     allMessages: [],
-    allUserFollowers: []
-    // searchLocation: ""
+    allUserFollowers: [],
+    searchUsersResults: []
   };
 
   static getDerivedStateFromError(error) {
@@ -149,6 +149,7 @@ class App extends Component {
           // this.fetchAllMessages();
           this.fetchAllUsers();
           this.fetchAllUserFollowers();
+          this.setUsers(this.state.users);
         })
         .catch(err => {
           console.error({ err });
@@ -224,6 +225,7 @@ class App extends Component {
         this.fetchComments();
         this.fetchAllUsers();
         this.fetchAllUserFollowers();
+        this.setUsers(this.state.users);
       })
       .catch(error => {
         // console.error({ error });
@@ -446,7 +448,8 @@ class App extends Component {
       allUsers: this.state.allUsers,
       allMessages: this.state.allMessages,
       handleClickConnect: this.handleClickConnect,
-      allUserFollowers: this.state.allUserFollowers
+      allUserFollowers: this.state.allUserFollowers,
+      searchUsersResults: this.state.searchUsersResults
     };
     return (
       <div className="App" style={{ height: "100%" }}>

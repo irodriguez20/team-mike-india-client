@@ -40,6 +40,7 @@ const NavBarContext = React.createContext({
   allUsers: [],
   allMessages: [],
   allUserFollowers: [],
+  searchUsersResults: []
 })
 
 

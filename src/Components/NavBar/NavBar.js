@@ -11,8 +11,42 @@ class NavBar extends React.Component {
     static contextType = NavBarContext;
 
     state = {
-        searchKeyword: ""
+        searchKeyword: "",
     };
+
+
+    handleChange = e => {
+        e.preventDefault();
+        // Variable to hold the original version of the list
+        let currentList = [];
+        // Variable to hold the filtered list before putting into state
+        let newList = [];
+
+        // If the search bar isn't empty
+        if (e.target.value !== "") {
+            // Assign the original list to currentList
+            currentList = this.context.users;
+            // Use .filter() to determine which items should be displayed
+            // based on the search terms
+            newList = currentList.filter(user => {
+                // change current item to lowercase
+                const lc = user.username.toLowerCase();
+                // change search term to lowercase
+                const filter = e.target.value.toLowerCase();
+                // check to see if the current list item includes the search term
+                // If it does, it will be added to newList. Using lowercase eliminates
+                // issues with capitalization in search terms and search content
+                return lc.includes(filter);
+            });
+        } else {
+            // If the search bar is empty, set newList to original task list
+            newList = this.context.users;
+        }
+        // Set the filtered state based on what our rules added to newList
+        this.context.searchUsersResults = newList;
+    }
+
+
 
     render() {
         const { userid } = this.context;
@@ -26,7 +60,7 @@ class NavBar extends React.Component {
                         </Link>
                     </div>
                     <div className="spacer">
-                        <div className="spacer">
+                        <div className="spacer" onChange={this.handleChange}>
                             <input
                                 placeholder="search users"
                                 className="search-input"
@@ -34,11 +68,10 @@ class NavBar extends React.Component {
                                 type="text"
                                 name="keyword"
                                 id="search-keyword"
-                                onChange={e => this.setState({ searchKeyword: e.target.value })}
                             />
-                            <span className="search-icon">
+                            <Link className="search-icon" to={'/users'}>
                                 <FontAwesomeIcon icon={faSearch} />
-                            </span>
+                            </Link>
                         </div>
                     </div>
 
