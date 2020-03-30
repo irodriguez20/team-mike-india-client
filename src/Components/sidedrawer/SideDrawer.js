@@ -62,20 +62,13 @@ class SideDrawer extends React.Component {
                   this.context.backDropClickHandler();
                 }}
               >
-                <Link to="/users">
+                <Link to="/connections">
                   <span className='NavBar__users fas fa-users'>
                     <FontAwesomeIcon size='2x' icon='users' />
                   </span>
                   {" "}
-                    Users
+                    Connections
                 </Link>
-              </li>
-              <li
-                onClick={() => {
-                  this.context.backDropClickHandler();
-                }}
-              >
-                <Link to="/connections">Connections</Link>
               </li>
               <li
                 onClick={() => {
