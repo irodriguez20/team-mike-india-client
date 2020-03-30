@@ -16,11 +16,6 @@ export default class Connection extends Component {
         const { user } = this.props;
         const { allUsers = [] } = this.context
 
-        // const connectionBody = {
-        //   userid: user.id,
-        //   followerid: this.context.userid
-        // }
-
 
         return (
             <Link to={`/users/${user.followerid}`} className="UsersListItem">

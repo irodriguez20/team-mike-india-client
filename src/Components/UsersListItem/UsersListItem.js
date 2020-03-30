@@ -14,12 +14,6 @@ export default class UsersListItem extends Component {
   render() {
     const { user } = this.props;
 
-    // const connectionBody = {
-    //   userid: user.id,
-    //   followerid: this.context.userid
-    // }
-
-
     return (
       <Link to={`/users/${user.id}`} className="UsersListItem">
         <div className="upper-container">
