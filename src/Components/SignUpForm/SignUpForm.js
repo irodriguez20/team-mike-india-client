@@ -109,6 +109,11 @@ class SignUpForm extends React.Component {
                     </div>
                     <div className="form-container sign-in-container">
                         <form action="#" className="sign-in-container-form" onSubmit={this.handleSubmitSignIn}>
+                            <section className="demoUser">
+                                <p>Email: testuser4
+                                    @yahoo.com</p>
+                                <p>Password: testpass</p>
+                            </section>
                             <h1>Sign in</h1>
                             <input
                                 required

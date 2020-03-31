@@ -18,17 +18,17 @@
 ## Message Mentors and Mentees
 
 > Easily contact your mentors and/or mentees.
-> ![upLift Messages screen](ReadMeImages/upLiftMessageScreenshot.png "upLift Messages screenshot")
+> ![upLift Messages screen](ReadMeImages/upLift-messages.png "upLift Messages screenshot")
 
 ### Add Posts
 
 > Easily add a new post to share any knowledge worth writing an article on for other users.
-> ![upLift Add Post screen](ReadMeImages/upLift-Posts.png "upLift Add Post screenshot")
+> ![upLift Add Post screen](ReadMeImages/upLift-posts.png "upLift Add Post screenshot")
 
 ### View a specific post, edit and delete posts and add comments.
 
 > Select a post to view the comments and to add a comment.
-> ![upLift Post screen](ReadMeImages/upLift-Post.png "upLift Post screenshot")
+> ![upLift Post screen](ReadMeImages/upLift-post-comments.png "upLift Post screenshot")
 
 ### Create a new profile or sign into your account.
 
@@ -40,7 +40,7 @@
 ### View a user profile.
 
 > View your profile and others.
-> ![upLift user profile screen](ReadMeImages/upLift-profile.png "upLift user profile screenshot")
+> ![upLift user profile screen](ReadMeImages/upLift-user.png "upLift user profile screenshot")
 
 <!-- ### Edit Posts
 
