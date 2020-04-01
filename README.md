@@ -13,7 +13,7 @@
 #### Technology Used
 
 > React, JavaScript, CSS, Enzyme, Jest, NPM, RESTFul API, Socket.io
-> [Try out upLift](https://uplift-olive.now.sh/ "Link to upLift homescreen").
+> [Try out upLift](https://uplift-2020.netlify.com/ "Link to upLift homescreen").
 
 ## Message Mentors and Mentees
 
