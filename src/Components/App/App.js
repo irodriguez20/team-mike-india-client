@@ -15,7 +15,7 @@ class App extends Component {
   state = {
     hasError: false,
     loggedIn: false,
-    userId: "",
+    userId: tokenService.findUserID(),
     email: "",
     userName: tokenService.userName,
     userFirstName: "",
@@ -56,11 +56,6 @@ class App extends Component {
     fetch(`${config.API_ENDPOINT}/api/userfollowers`, options)
       .then(res => res.json())
       .then(res => {
-        // const userConnection = {
-        //   connectionid: res.connectionid,
-        //   userid: res.userid,
-        //   followerid: res.followerid
-        // }
         this.setState({
           allUserFollowers: res
         });
@@ -69,25 +64,6 @@ class App extends Component {
         console.log(err);
       });
   };
-
-  // fetchAllMessages = () => {
-  //   const options = {
-  //     method: "Get",
-  //     headers: new Headers({
-  //       "Content-Type": "application/json"
-  //     })
-  //   };
-
-  //   fetch(`http://localhost:8000/api/messages`, options)
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       console.log(res);
-  //       this.setState({ allMessages: res });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // };
 
   fetchAllUsers = () => {
     const options = {
@@ -120,7 +96,6 @@ class App extends Component {
     if (this.state.token !== null && this.state.userName !== null) {
       const loggedInUser = {
         userName: this.state.userName
-        // token: this.state.token,
       };
 
       fetch(`${config.API_ENDPOINT}/api/auth`, {
@@ -196,7 +171,6 @@ class App extends Component {
   };
 
   logIn = userInfo => {
-
     AuthApiService.postLogin(userInfo);
     fetch(`${config.API_ENDPOINT}/api/auth/login`, {
       method: "POST",
@@ -215,12 +189,14 @@ class App extends Component {
       .then(res => {
         tokenService.create(res.token);
         tokenService.storeUser(res.username);
+        tokenService.storeUserID(res.id);
         this.setState({
           userId: res.id,
           userName: res.username,
           email: res.email,
           loggedIn: true
         });
+
         this.fetchPosts();
         this.fetchComments();
         this.fetchAllUsers();
@@ -228,8 +204,9 @@ class App extends Component {
         this.setUsers(this.state.users);
       })
       .catch(error => {
-        // console.error({ error });
-        Swal.fire(`Username or password incorrect. Please try again or sign up: ${error.error.message}`);
+        Swal.fire(
+          `Username or password incorrect. Please try again or sign up: ${error.error.message}`
+        );
       });
   };
 

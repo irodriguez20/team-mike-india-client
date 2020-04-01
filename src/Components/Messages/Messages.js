@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NavBarContext from "../../contexts/NavBarContext";
 import MessageContext from "./MessageContext";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Messages.css";
 import ChatPage from "./ChatPage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,25 +9,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import config from "../../config";
+import { tokenService } from "../../services/token-service";
 
-
-import {
-  faUser
-} from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 export default class Messages extends Component {
   state = {
     messages: [],
     userConversations: [],
     filtered: [],
-    loggedInUserID: this.context.userid,
-    usersInConvos: []
+    loggedInUserID: tokenService.userID,
+    usersInConvos: [],
+    userInChat: {}
   };
 
   static contextType = NavBarContext;
 
   componentDidMount() {
     this.fetchAllMessages();
+    this.fetchAllUsers();
   }
 
   fetchAllMessages = () => {
@@ -43,17 +43,35 @@ export default class Messages extends Component {
       .then(responseMessages => {
         const userConversations = responseMessages.filter(
           message =>
-            Number(message.author_id) === this.context.userid ||
-            Number(message.recipient_id) === this.context.userid
+            message.author_id === this.state.loggedInUserID ||
+            message.recipient_id === this.state.loggedInUserID
         );
-        const setAllUsers = this.context.allUsers.filter(user =>
-          user.id !== this.context.userid
-        );
-
-        this.setState({ messages: userConversations, usersInConvos: setAllUsers });
+        this.setState({
+          messages: userConversations
+        });
       })
       .catch(err => {
         Swal.fire(err);
+      });
+  };
+
+  fetchAllUsers = () => {
+    const options = {
+      method: "Get",
+      headers: new Headers({
+        "Content-Type": "application/json"
+      })
+    };
+    fetch(`${config.API_ENDPOINT}/api/users`, options)
+      .then(res => res.json())
+      .then(res => {
+        const setAllUsers = res.filter(
+          user => user.id !== Number(this.state.loggedInUserID)
+        );
+        this.setState({ usersInConvos: setAllUsers });
+      })
+      .catch(err => {
+        Swal.fire(err.error.message);
       });
   };
 
@@ -67,7 +85,6 @@ export default class Messages extends Component {
       recipient_id: recipient[0].id,
       author_id: messageBody.author_id
     };
-
 
     // Post message
     fetch(`${config.API_ENDPOINT}/api/messages`, {
@@ -98,16 +115,15 @@ export default class Messages extends Component {
       })
     };
 
-    fetch(
-      `${config.API_ENDPOINT}/api/messages/${messageID}`,
-      options
-    )
+    fetch(`${config.API_ENDPOINT}/api/messages/${messageID}`, options)
       .then(res => {
         if (!res.ok) {
           return res.json().then(e => Promise.reject(e));
         }
 
-        this.setState({ messages: this.state.messages.filter(n => n.id !== messageID) });
+        this.setState({
+          messages: this.state.messages.filter(n => n.id !== messageID)
+        });
       })
       .catch(err => {
         Swal.fire(err.error.message);
@@ -142,17 +158,18 @@ export default class Messages extends Component {
       newList = this.state.usersInConvos;
     }
     // Set the filtered state based on what our rules added to newList
-    this.setState({ usersInConvos: newList })
-  }
+    this.setState({ usersInConvos: newList });
+  };
 
   render() {
     const value = {
       messages: this.state.messages,
-      loggedInUserID: this.context.userid,
-      allUsers: this.context.allUsers,
+      loggedInUserID: this.state.loggedInUserID,
+      allUsers: this.state.usersInConvos,
       usersInConvos: this.state.usersInConvos,
       handleAddMessage: this.handleAddMessage,
-      handleDeleteMessage: this.handleDeleteMessage
+      handleDeleteMessage: this.handleDeleteMessage,
+      userInChat: this.state.userInChat
     };
 
     // const userConversations = this.state.messages;
@@ -173,8 +190,17 @@ export default class Messages extends Component {
           <div id="conversation-list">
             <ul>
               {this.state.usersInConvos.map((user, index) => (
-                <li key={index}>
-                  <NavLink to={`/messages/${user.username}`} className="conversation-link" >
+                <li
+                  key={index}
+                  onClick={e => {
+                    e.preventDefault();
+                    this.setState({ userInChat: user });
+                  }}
+                >
+                  <NavLink
+                    to={`/messages/${user.username}`}
+                    className="conversation-link"
+                  >
                     <div className="conversation">
                       <FontAwesomeIcon icon={faUser} />
                       <div className="title-text">{user.username}</div>
@@ -184,9 +210,7 @@ export default class Messages extends Component {
               ))}
             </ul>
           </div>
-          <div id="new-message-container">
-            {/* <a href="#">+</a> */}
-          </div>
+          <div id="new-message-container">{/* <a href="#">+</a> */}</div>
           <MessageContext.Provider value={value}>
             <ChatPage />
           </MessageContext.Provider>
