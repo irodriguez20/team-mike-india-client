@@ -82,6 +82,8 @@ class NavBar extends React.Component {
                                     <li>
                                         <Link to="/messages">
                                             <FontAwesomeIcon icon={faCommentAlt} />
+                                            {" "}
+                                            Messages
                                         </Link>
                                     </li>
                                     <li>
